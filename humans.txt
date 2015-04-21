@@ -1,0 +1,10 @@
+# humanstxt.org/
+# The humans responsible & technology colophon
+
+# TEAM
+
+    Anthony Bouvier : @thebouv
+
+# TECHNOLOGY COLOPHON
+
+    HTML5, CSS
