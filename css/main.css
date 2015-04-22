@@ -1,3 +1,7 @@
+* {
+    box-sizing: border-box; 
+}
+
 body {
     background-color: #000;
 }
@@ -10,18 +14,22 @@ body {
 .row {
     position: absolute;
     top: 50%;
+    text-align: center;
+    width: 100%;
     -webkit-transform: translateY(-50%);
     -ms-transform: translateY(-50%);
     transform: translateY(-50%);
 }
 
-.container {
-    width: 50%;
-    text-align: center;
-    float: left;
+a.bouvbuttons {
+    font-size: 33vw;
+    display: inline-block;
 }
 
-.container img {
-    max-width: 95%;
-    height: auto;
+a.bouvbuttons, a.bouvbuttons:visited, a.bouvbuttons:link {
+    color: #FFF;
+}
+
+a.bouvbuttons:hover {
+    color: #DCDCDC;
 }
