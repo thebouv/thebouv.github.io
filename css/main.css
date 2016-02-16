@@ -1,5 +1,10 @@
 * {
-    box-sizing: border-box; 
+    box-sizing: border-box;
+}
+
+html, body {
+    width: 100%;
+    height: 100%;
 }
 
 body {
@@ -9,21 +14,21 @@ body {
 .main-container {
     width: 100%;
     height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .row {
-    position: absolute;
-    top: 50%;
-    text-align: center;
     width: 100%;
-    -webkit-transform: translateY(-50%);
-    -ms-transform: translateY(-50%);
-    transform: translateY(-50%);
+    display: flex;
+    justify-content: center;
 }
 
 a.bouvbuttons {
     font-size: 33vw;
     display: inline-block;
+    padding: 2px;
 }
 
 a.bouvbuttons, a.bouvbuttons:visited, a.bouvbuttons:link {
