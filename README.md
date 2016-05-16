@@ -1,5 +1,5 @@
-# thebouvdotcom
-Just my simple little website.
+# thebouv.github.io
+Just my simple little website at thebouv.com
 
 Nothing much here but three vertical/horizontal centered buttons to my Twitter, LinkedIn, and GitHub profiles.
 
