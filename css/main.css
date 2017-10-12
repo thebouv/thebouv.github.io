@@ -32,9 +32,9 @@ a.bouvbuttons {
 }
 
 a.bouvbuttons, a.bouvbuttons:visited, a.bouvbuttons:link {
-    color: #FFF;
+    color: #d47525;
 }
 
 a.bouvbuttons:hover {
-    color: #DCDCDC;
+    color: #a55819;
 }
