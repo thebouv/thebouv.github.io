@@ -44,11 +44,11 @@ a.one, a.one:visited, a.one:link {
 }
 
 a.two, a.two:visited, a.two:link {
-    color: gray;
+    color: green;
 }
 
 a.one:hover {
-    color: green;
+    color: gray;
 }
 
 a.two:hover{
