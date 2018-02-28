@@ -34,26 +34,26 @@ a.bouvbuttons {
 }
 
 a.bouvbuttons, a.bouvbuttons:visited, a.bouvbuttons:link {
-    color: #FFBAD7;
+    color: #e0cdff;
 }
 
 a.bouvbuttons:hover {
-    color: #FF81B6;
+    color: #bd97fb;
 }
 
 a.one, a.one:visited, a.one:link {
-    color: #FE4A4A;
+    color: #c1f0fb;
 }
 
 a.one:hover {
-    color: #C22121;
+    color: #71dff9;
 }
 
 a.two, a.two:visited, a.two:link {
-    color: #D9A8FF;
+    color: #dcf9a8;
 }
 
 a.two:hover {
-    color: #A65CDF;
+    color: #c1f95e;
 }
 
