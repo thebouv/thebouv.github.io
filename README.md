@@ -6,3 +6,5 @@ Nothing much here but three vertical/horizontal centered buttons to my Twitter, 
 What more do you need on a personal site?
 
 *... maybe more later ...*
+
+Color choices and design via my favoritest intern [@meggihelli](https://github.com/meggihelli)  
