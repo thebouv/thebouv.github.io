@@ -1,0 +1,68 @@
+==================================================================
+https://keybase.io/thebouv
+--------------------------------------------------------------------
+
+I hereby claim:
+
+  * I am an admin of http://thebouv.com
+  * I am thebouv (https://keybase.io/thebouv) on keybase.
+  * I have a public key with fingerprint B7B1 E67D A27A 1F47 56EB  4732 2226 E190 8D28 A58E
+
+To do so, I am signing this object:
+
+{
+  "body": {
+    "key": {
+      "eldest_kid": "0101117540a55f01ff18eb5f41ba978238d310c0b4d8acb9d021ca877bd754af62d80a",
+      "fingerprint": "b7b1e67da27a1f4756eb47322226e1908d28a58e",
+      "host": "keybase.io",
+      "key_id": "2226e1908d28a58e",
+      "kid": "0101117540a55f01ff18eb5f41ba978238d310c0b4d8acb9d021ca877bd754af62d80a",
+      "uid": "f82df57c0b9e8548513d424a1567d219",
+      "username": "thebouv"
+    },
+    "service": {
+      "hostname": "thebouv.com",
+      "protocol": "http:"
+    },
+    "type": "web_service_binding",
+    "version": 1
+  },
+  "ctime": 1520623260,
+  "expire_in": 157680000,
+  "prev": "e9002ed9212d50c53301d15338c3c74c3da621457028527dfb8053de7c34ba53",
+  "seqno": 12,
+  "tag": "signature"
+}
+
+which yields the signature:
+
+-----BEGIN PGP MESSAGE-----
+Version: Keybase OpenPGP v2.0.76
+Comment: https://keybase.io/crypto
+
+yMIgAnicrZJdSBVBFMevfUkXLAkqkgjbJEtMZmZ3dudKgZZUJCFGqYVym9mZ1fXj
+7u3evZqJlT0EUSRBoZlECX2YhUlQSCSZVpD00CcWaRmK0EOERRJ9zko9BD12Xg5z
+5vf/zznD6U+Y7vPHDXX3vZnIMkvjBnpPxHw72oZb6xTm8Fols06pEFNJVHIRdYMV
+NlcyFQABhNDAGqAYWwBaFiSCYUuDjAYMglTCVQhMwDROqMkCHCBoUmIYjEsRtXTE
+CaBKumLZoVIRCUfskCttmcGg0A1OkUGhpRlYF0wzVCRDFzAACEeEYiKksMyJegrZ
+HKNRkWE7siYPwan2/sH/575jU3YWQdzChuQDgmCNYKhyDWkUYjkEggEPjIpIiFYJ
+SbtlgjmxaqU+XZHFatsU3r96g/wNZJhOlVSGI47rmE6lvChz3XCmp3Nrwx5YI1jw
+t0WQ2SEuP1EKqkUkajshJRNK0nRtzxNiBHSkIh2kK2J32I6IoO0R2NAJkOE9I6ql
+pQgAgAQPIIg4BiZWVQA5lImYqmlopsqpjqCGDYAIRga3GAFY5cIwVY1RrCreULtC
+jvRGsk9aKj2jdmmIurGIUOrv3C6e4Yvz+2bNnOZtl88/O/HPzqVPxv8Mn2Trxh7X
+5vKW8fZDa48MiPaRHvdr8rnF8zqfrLifnZTyKXd5cV93+ejNtBQ03hg/1Fne8HxL
+EZo9+Sz/XVL3vvf527+d62HfH13OyVAX9Wx8MP9hQ+/B/o6s23Pc8JWElpSjjXj/
+tQFa1FxVmNO0ajTQcfae+bbgWVtJj/ZhrGLlLb++bPI1CN4Ybr5bENk7aF7Y+ujM
+w9TcNVdPN23TFvxsP5zXuKet5NvE2Rp8auGS84AcaA1f9Zf8KDzm/7iBZfdtLJ+c
+aA0dPn9x/dOunOaF19M2p+qbVve/Cl6aubSrt2DlyODcuM+d+fWJyTDPcrOaX3a9
+KHhw48mXnV2bjmetif0CKu9EPw==
+=n2gK
+-----END PGP MESSAGE-----
+
+And finally, I am proving ownership of this host by posting or
+appending to this document.
+
+View my publicly-auditable identity here: https://keybase.io/thebouv
+
+==================================================================
