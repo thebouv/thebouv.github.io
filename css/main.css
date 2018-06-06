@@ -8,7 +8,7 @@ html, body {
 }
 
 body {
-    background-color: white;
+    background-color: #fff;
 }
 
 
@@ -34,26 +34,26 @@ a.bouvbuttons {
 }
 
 a.bouvbuttons, a.bouvbuttons:visited, a.bouvbuttons:link {
-    color: #e0cdff;
+    color: #0187af;
 }
 
 a.bouvbuttons:hover {
-    color: #bd97fb;
+    color: #014358;
 }
 
 a.one, a.one:visited, a.one:link {
-    color: #c1f0fb;
+    color: #f27421;
 }
 
 a.one:hover {
-    color: #71dff9;
+    color: #f19720;
 }
 
 a.two, a.two:visited, a.two:link {
-    color: #dcf9a8;
+    color: #ffe00b;
 }
 
 a.two:hover {
-    color: #c1f95e;
+    color: #fcec7b;
 }
 
