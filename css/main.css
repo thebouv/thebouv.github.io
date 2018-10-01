@@ -8,7 +8,7 @@ html, body {
 }
 
 body {
-    background-color: #fff;
+    background-color: #000;
 }
 
 
@@ -34,26 +34,69 @@ a.bouvbuttons {
 }
 
 a.bouvbuttons, a.bouvbuttons:visited, a.bouvbuttons:link {
-    color: #0187af;
+    color: #ff9a00;
 }
 
 a.bouvbuttons:hover {
-    color: #014358;
+    color: #d6870f;
 }
 
 a.one, a.one:visited, a.one:link {
-    color: #f27421;
+    color: #09ff00;
 }
 
 a.one:hover {
-    color: #f19720;
+    color: #10c909;
 }
 
 a.two, a.two:visited, a.two:link {
-    color: #ffe00b;
+    color: #c900ff;
 }
 
 a.two:hover {
-    color: #fcec7b;
+    color: #950aba;
 }
+
+.container {
+  position: absolute;
+  top: 25%;
+  left: 50%;
+  margin-left: -64.5px;
+  margin-top: -85.5px;
+}
+
+.ghost {
+  animation: float 3s ease-out infinite;
+}
+
+@keyframes float {
+  50% {
+     transform: translate(0, 20px);
+  }
+}
+.shadowFrame {
+  width: 130px;
+  margin-top: 15px;
+}
+.shadow {
+  animation: shrink 3s ease-out infinite;
+  transform-origin: center center;
+}
+
+@keyframes shrink {
+  0% {
+    width: 90%;
+    margin: 0 5%;
+  }
+  50% {
+    width: 60%;
+    margin: 0 18%;
+  }
+  100% {
+    width: 90%;
+    margin: 0 5%;
+  }
+}
+
+
 
