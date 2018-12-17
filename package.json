@@ -1,0 +1,26 @@
+{
+  "name": "thebouv",
+  "version": "1.0.0",
+  "description": "Just my simple little website at thebouv.com",
+  "main": "index.js",
+  "dependencies": {
+    "node-sass": "^4.11.0",
+    "nodemon": "^1.18.9"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "buildcss": "node-sass --include-path scss css/main.scss css/main.css",
+    "watchcss": "nodemon -e scss -x \"npm run buildcss\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/meggihelli/thebouv.github.io.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/meggihelli/thebouv.github.io/issues"
+  },
+  "homepage": "https://github.com/meggihelli/thebouv.github.io#readme"
+}
