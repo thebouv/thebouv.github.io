@@ -5,10 +5,11 @@
 html, body {
     width: 100%;
     height: 100%;
+    margin: 0;
 }
 
 body {
-    background-color: #000;
+    background-color: #FFF;
 }
 
 
@@ -34,69 +35,118 @@ a.bouvbuttons {
 }
 
 a.bouvbuttons, a.bouvbuttons:visited, a.bouvbuttons:link {
-    color: #ff9a00;
+    color: #BF9ACA;
 }
 
 a.bouvbuttons:hover {
-    color: #d6870f;
+    color: #B36AC9;
 }
 
 a.one, a.one:visited, a.one:link {
-    color: #09ff00;
+    color: #EFBC9B;
 }
 
 a.one:hover {
-    color: #10c909;
+    color: #EFA675;
 }
 
 a.two, a.two:visited, a.two:link {
-    color: #c900ff;
+    color: #EE92C2;
 }
 
 a.two:hover {
-    color: #950aba;
+    color: #ED6FB0;
 }
 
-.container {
-  position: absolute;
-  top: 25%;
-  left: 50%;
-  margin-left: -64.5px;
-  margin-top: -85.5px;
-}
+.heart{
+	width:200px;
+	height:200px;
+    top: 13%; 
+	left:50%;
+	z-index:1;
+	display:block;
+	position:absolute;
+	transform:translate(-50%,-50%);
+	animation:heart 4s ease infinite
+	}
 
-.ghost {
-  animation: float 3s ease-out infinite;
-}
+@keyframes heart{
+	0%{transform:translate(-50%,-50%) scale(.2,.2)}
+	8%{transform:translate(-50%,-50%) scale(.4,.4)}
+	16%{transform:translate(-50%,-50%) scale(.3,.3)}
+	24%{transform:translate(-50%,-50%) scale(.5,.5)}
+	32%{transform:translate(-50%,-50%) scale(.4,.4)}
+	40%{transform:translate(-50%,-50%) scale(.6,.6)}
+	48%{transform:translate(-50%,-50%) scale(.5,.5)}
+	56%{transform:translate(-50%,-50%) scale(.7,.7)}
+	64%{transform:translate(-50%,-50%) scale(.6,.6)}
+	72%{transform:translate(-50%,-50%) scale(.8,.8)}
+	80%{transform:translate(-50%,-50%) scale(.7,.7)}
+	88%{transform:translate(-50%,-50%) scale(.9,.9)}
+	96%{transform:translate(-50%,-50%) scale(.8,.8)}
+	100%{transform:translate(-50%,-50%) scale(1,1)}
+	}
 
-@keyframes float {
-  50% {
-     transform: translate(0, 20px);
-  }
-}
-.shadowFrame {
-  width: 130px;
-  margin-top: 15px;
-}
-.shadow {
-  animation: shrink 3s ease-out infinite;
-  transform-origin: center center;
-}
+.heart:before{
+	background:#fff;
+	content:"";
+	width:170px;
+	height:170px;
+	top:15px;
+	left:15px;
+	display:block;
+	position:absolute;
+	border-radius:50%
+	}
 
-@keyframes shrink {
-  0% {
-    width: 90%;
-    margin: 0 5%;
-  }
-  50% {
-    width: 60%;
-    margin: 0 18%;
-  }
-  100% {
-    width: 90%;
-    margin: 0 5%;
-  }
-}
+.heart div{
+	background:#ff0000;
+	width:80px;
+	height:120px;
+	top:40px;
+	display:block;
+	position:absolute;
+	border-radius:50%
+	}
 
+.left
+	{left:45px;transform:rotate(330deg)}
 
+.right
+	{right:45px;transform:rotate(30deg)}
 
+.shadow{
+	width:200px;
+	height:200px;
+	top:13%;
+	left:50%;
+	display:block;
+	position:absolute;
+	transform:translate(-50%,-50%);
+	animation:shadow 4s ease infinite
+	}
+
+@keyframes shadow{
+	0%,96%{transform:translate(-50%,-50%) scale(0,0)}
+	100%{transform:translate(-50%,-50%) scale(1,1)}
+	}
+
+[class*="glow_"]{
+	background:#ff0000;
+	width:10px;
+	height:100%;
+	top:0;
+	left:95px;
+	display:block;
+	position:absolute;
+	border-radius:10px
+	}
+
+.glow_2
+	{transform:rotate(45deg)}
+
+.glow_3
+	{transform:rotate(90deg)}
+
+.glow_4
+	{transform:rotate(135deg)}
