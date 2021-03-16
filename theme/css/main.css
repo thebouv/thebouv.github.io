@@ -87,7 +87,7 @@ body {
 /* END FONTS */
 /* MAIN CONTENT CONTAINER */
 .page {
-  max-width: 42.5em;
+  max-width: 60em;
   /* 680/16 = 42.5 */
   margin: auto;
   text-align: center;
