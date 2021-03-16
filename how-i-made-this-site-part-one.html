@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-55712845-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-55712845-1');
+</script>
+        <title>thebouv</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta charset="utf-8" />
+        <!-- twitter card metadata -->
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="/images/thebouv.jpg">
+<meta name="twitter:site" content="@thebouv">
+<meta name="twitter:title" content="How I made this site (part one)">
+<meta name="twitter:description" content="">
+        <!-- OG Tags -->
+<meta property="og:url" content="/how-i-made-this-site-part-one.html"/>
+<meta property="og:title" content="thebouv | How I made this site (part one)" />
+<meta property="og:description" content="" />
+        <!-- favicon -->
+        <link rel="icon" type="image/png" href="/images/thebouv.jpg">
+        <!-- moment.js for date formatting -->
+        <script src="/theme/js/moment.js"></script>
+        <!-- css -->
+        <link rel="stylesheet" type="text/css" href="/theme/css/main.css" />
+        <link rel="stylesheet" type="text/css" href="/theme/css/pygment.css" />
+		<link href="/theme/css/icons.fallback.css" rel="stylesheet"></noscript>
+        <!-- menu toggle javascript -->
+        <script type="text/javascript">
+            document.addEventListener("DOMContentLoaded", initMenu);
+            
+            function initMenu(){
+                var menu = document.getElementById("menu");
+                var menulink = document.getElementById("menu-link");
+                menulink.addEventListener("click", function toggleMenu(){
+                        window.event.preventDefault();
+                        menulink.classList.toggle('active');
+                        menu.classList.toggle('active');              
+                    });
+            };
+        </script>
+
+
+    <meta name="tags" content="pelican" />
+    <meta name="tags" content="python" />
+
+</head>
+<body>
+    <div role="banner" id="masthead">
+        <header>
+            <a href="/"><img src="/images/thebouv.jpg" alt="Logo"></a>
+            <a href="#menu" id="menu-link">more stuff</a>
+            <nav id="menu">
+                <ul>
+                        <li><a href="/pages/about.html">about</a></li>
+                        <li><a href="/tags">tags</a></li>
+                </ul>
+            </nav>
+        </header>
+    </div>
+        <div class="page" role="main">
+  <div class="article" role="article">
+    <article>
+        <footer>
+            <a name="top"></a>
+            <p>
+              <time datetime=" 2021-03-14 00:00:00-06:00">
+                <script>document.write(moment('2021-03-14 00:00:00-06:00').format('LL'));</script>
+              </time>
+            </p>
+        </footer>
+        <header>
+          <h2>
+            How I made this site (part one)
+          </h2>
+        </header>
+      <div class="content">
+         <p>I chose to use <a href="https://getpelican.org/">pelican</a> for a few reasons:</p>
+<ul>
+<li>This site is hosted for free on GitHub and that means it needs to be statically generated. </li>
+<li>Pelican is written in python and I'm a python fanboy.</li>
+<li>Pelican is still in active development based on the merges, issues, and discussion on its repo in GitHub.</li>
+<li>Pelican has all the features I need plus I can supplement with other things like <a href="http://www.pyinvoke.org/">invoke</a> (which I just learned about and am excited to try).</li>
+</ul>
+<p>In the final structure, I will have one repo for the pelican install (<em>thebouv-pelican.git</em>) which will have settings, pelican files, raw assets like a post's markdown files and images. And one for the static site files (<em>thebouv.github.io.git</em>) because GitHub only serves from root or /docs. I feel this way is cleaner and allows the I will be automating publishing with <strong>invoke</strong>.</p>
+<p>I am basing this process off of <a href="https://randlow.github.io/posts/python/create-pelican-blog/">this tutorial</a> but with some of my own ideas and organizational changes. Definitely fewer dependencies as I have no need for Jupyter Notebooks on this site, nor for now do I think I need typogrify or beautifulsoup as per that tutorial. I'll also be looking at the <a href="https://docs.getpelican.com/en/latest/install.html">pelican quickstart</a> and other pelican docs to make decisions as I go.</p>
+<h2>Setting Up</h2>
+<p>First I cleared all previous content out of my previous static site and leave only the README.md and CNAME files. The README will get updated during the project and CNAME is a text file required by GitHub to have thebouv.com as a custom domain.  I could have set up a totally new repo or trashed this one and restarted, but with git I don't need to and I can always roll back one day or refer to the old site if I need.</p>
+<h3>Some git stuff</h3>
+<p>I create my empty repo for <em>thebouv-pelican</em> and set it up in GitHub as a remote:</p>
+<div class="highlight"><pre><span></span><code>mkdir thebouv-pelican
+cd thebouv-pelican
+git init
+gh repo create
+</code></pre></div>
+
+
+<p>Notice the <em>gh</em> command. If you don't use the GitHub command line tool <em>gh</em> yet I do recommend it. It is pretty handy.</p>
+<h3>Pelican!</h3>
+<p>Now to set up my python environment and start getting Pelican set up.  I'm doing this all with python 3.9.1 because it is stable and the most recent 3.9 release that pyenv has.</p>
+<div class="highlight"><pre><span></span><code>python -m venv .venv
+source .venv/bin/activate
+pip install &quot;pelican[markdown]&quot; invoke
+pip freeze &gt; requirements.txt
+</code></pre></div>
+
+
+<p>Now for the remainder of this post I'm going to no longer talk about being in a venv, activating, deactivating, etc. If I'm in a python project, I've got the venv activated. I assume the reader is managing this aspect.</p>
+<p>I'm going to run the <em>pelican_quickstart</em> command line app and answer all the questions it poses. I'm filling out my site's details and pretty much accepting the defaults to things with defaults. <strong>Except</strong> I am not answering yes to creaking a tasks.py and Makefile. Cause I don't want a Makefile with its own syntax when I can use <strong>invoke</strong> to do all the same things to help me publish.</p>
+<p>I'm also manually creating a pages folder under the content folder generated by <em>pelican_quickstart</em> because I will want some stand-alone non-blog pages in the future like a resume.</p>
+<div class="highlight"><pre><span></span><code>pelican_quickstart
+mkdir content/pages
+</code></pre></div>
+
+
+<p>This leaves me with this structure below:</p>
+<div class="highlight"><pre><span></span><code>thebouv-pelican/
+├── content
+│   └── pages
+├── output
+├── pelicanconf.py       # Main settings file
+├── publishconf.py       # Settings to use when ready to publish
+└── requirements.txt     # saved earlier from pip freeze
+</code></pre></div>
+
+
+<p>Now that those exist and I want to start adding content, I want to do one thing real quick. I want to make my output directory actually be a git submodule of <em>thebouv.github.io.git</em> since the generated output will be in that repo.</p>
+<div class="highlight"><pre><span></span><code>git submodule add -f git@github.com:thebouv/thebouv.github.io.git output
+</code></pre></div>
+
+
+<p>Later I will automate committing and pushing both this repo and the generated content up to GitHub with <em>invoke</em>.</p>
+<h3>Theme</h3>
+<p>For now I plan to use a theme that is inside this repo called <a href="https://github.com/mc-buckets/brutalistpelican">brutalistpelican</a> but host just a fork of the theme for my own version. I'm doing this because I don't need the rest of his pelican set up (I have my own which this post is about) and only the theme itself. After I clone their repo I move the theme folder out and set it all up as its own <a href="https://github.com/thebouv/brutalist-theme">repo</a>.  Then I can add the submodule like I wanted to do:</p>
+<div class="highlight"><pre><span></span><code>git submodule add -f git@github.com:thebouv/brutalist-theme.git theme/brutalist-theme
+</code></pre></div>
+
+
+<p>I've definitely made some changes to the theme that I'm not going to go into detail on. One of the main things I've done is get rid of any external javascript except Google Analytics. I also tweak page width to 60em max (non-brutalist but I wanted a slightly wider content area). I'll be making more changes over time and if they're significant, I'll write about them but likely most will be slight tweaks.</p>
+<p>Any changes I make to the theme will need to be pushed up as well to its own repo but I can do it <em>from</em> the submodule itself which is handy and something I will be automating with <strong>invoke</strong> in part two of this post.</p>
+<div class="highlight"><pre><span></span><code>cd theme/brutal-theme
+git add --all
+git commit -m &quot;some message about the changes I made&quot;
+git push
+</code></pre></div>
+
+
+<h3>Let's fire this baby up!</h3>
+<p>This article, the one I'm writing and you're reading, is the first post in my blog. So the instructions below are so I can test this out locally and see it for the first time in all its simple glory:</p>
+<div class="highlight"><pre><span></span><code>pelican content
+</code></pre></div>
+
+
+<p>This statically generates all the content and uses the theme to style it. Then it puts all those static files in output which you'll recall is a submodule. Then I can go into that folder add all the output to git and push it up. And since it is set up to be hosted by GitHub once this output is pushed up, my site will appear here at https://thebouv.com</p>
+<div class="highlight"><pre><span></span><code>cd output
+git add --all
+git commit -m &quot;auto-generated output from pelican&quot;
+git push
+</code></pre></div>
+
+
+<h3>Next time</h3>
+<p>Okay, realize this is getting long and I have more to do but I've detailed everything that has gotten the site to this point.  Well, besides the fact that I switched themes like 5 times but I didn't need to document that part. ;)</p>
+      </div>
+      <div class="back-to-top">
+          <a href="#top">back to top</a>
+      </div>
+    </article>
+  </div>
+<!-- end article -->
+                <footer>
+                    <div class="icons">
+                        <a href="https://twitter.com/thebouv" target="_blank"><div class="icon-twitter icon"></div></a>
+                        <a href="https://github.com/thebouv" target="_blank"><div class="icon-github icon"></div></a>
+                    </div>
+                    <p>© Anthony Bouvier</p>
+                </footer>
+        </div>
+</body>
+</html>
