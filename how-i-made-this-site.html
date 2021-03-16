@@ -29,15 +29,8 @@
         <script src="/theme/js/moment.js"></script>
         <!-- css -->
         <link rel="stylesheet" type="text/css" href="/theme/css/main.css" />
-		<script>
-			
-                /*! grunt-grunticon Stylesheet Loader - v2.1.2 | https://github.com/filamentgroup/grunticon | (c) 2015 Scott Jehl, Filament Group, Inc. | MIT license. */
-    
-    (function(e){function t(t,n,r,o){"use strict";function a(){for(var e,n=0;u.length>n;n++)u[n].href&&u[n].href.indexOf(t)>-1&&(e=!0);e?i.media=r||"all":setTimeout(a)}var i=e.document.createElement("link"),l=n||e.document.getElementsByTagName("script")[0],u=e.document.styleSheets;return i.rel="stylesheet",i.href=t,i.media="only x",i.onload=o||null,l.parentNode.insertBefore(i,l),a(),i}var n=function(r,o){"use strict";if(r&&3===r.length){var a=e.navigator,i=e.Image,l=!(!document.createElementNS||!document.createElementNS("http://www.w3.org/2000/svg","svg").createSVGRect||!document.implementation.hasFeature("http://www.w3.org/TR/SVG11/feature#Image","1.1")||e.opera&&-1===a.userAgent.indexOf("Chrome")||-1!==a.userAgent.indexOf("Series40")),u=new i;u.onerror=function(){n.method="png",n.href=r[2],t(r[2])},u.onload=function(){var e=1===u.width&&1===u.height,a=r[e&&l?0:e?1:2];n.method=e&&l?"svg":e?"datapng":"png",n.href=a,t(a,null,null,o)},u.src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==",document.documentElement.className+=" grunticon"}};n.loadCSS=t,e.grunticon=n})(this);(function(e,t){"use strict";var n=t.document,r="grunticon:",o=function(e){if(n.attachEvent?"complete"===n.readyState:"loading"!==n.readyState)e();else{var t=!1;n.addEventListener("readystatechange",function(){t||(t=!0,e())},!1)}},a=function(e){return t.document.querySelector('link[href$="'+e+'"]')},c=function(e){var t,n,o,a,c,i,u={};if(t=e.sheet,!t)return u;n=t.cssRules?t.cssRules:t.rules;for(var l=0;n.length>l;l++)o=n[l].cssText,a=r+n[l].selectorText,c=o.split(");")[0].match(/US\-ASCII\,([^"']+)/),c&&c[1]&&(i=decodeURIComponent(c[1]),u[a]=i);return u},i=function(e){var t,o,a;o="data-grunticon-embed";for(var c in e)if(a=c.slice(r.length),t=n.querySelectorAll(a+"["+o+"]"),t.length)for(var i=0;t.length>i;i++)t[i].innerHTML=e[c],t[i].style.backgroundImage="none",t[i].removeAttribute(o);return t},u=function(t){"svg"===e.method&&o(function(){i(c(a(e.href))),"function"==typeof t&&t()})};e.embedIcons=i,e.getCSS=a,e.getIcons=c,e.ready=o,e.svgLoadedCallback=u,e.embedSVG=u})(grunticon,this);
-                
-                grunticon(["/theme/css/icons.data.svg.css", "/theme/css/icons.data.png.css", "/theme/css/icons.fallback.css"]);
-            </script>
-        <noscript><link href="/theme/css/icons.fallback.css" rel="stylesheet"></noscript>
+        <link rel="stylesheet" type="text/css" href="/theme/css/pygment.css" />
+		<link href="/theme/css/icons.fallback.css" rel="stylesheet"></noscript>
         <!-- menu toggle javascript -->
         <script type="text/javascript">
             document.addEventListener("DOMContentLoaded", initMenu);
@@ -102,57 +95,57 @@
 <p>First I cleared all previous content out of my previous static site and leave only the README.md and CNAME files. The README will get updated during the project and CNAME is a text file required by GitHub to have thebouv.com as a custom domain.  I could have set up a totally new repo or trashed this one and restarted, but with git I don't need to and I can always roll back one day or refer to the old site if I need.</p>
 <h3>Some git stuff</h3>
 <p>I create my empty repo for <em>thebouv-pelican</em> and set it up in GitHub as a remote:</p>
-<div class="highlight"><pre><span></span><code><span class="err">mkdir thebouv-pelican</span>
-<span class="err">cd thebouv-pelican</span>
-<span class="err">git init</span>
-<span class="err">gh repo create</span>
+<div class="highlight"><pre><span></span><code>mkdir thebouv-pelican
+cd thebouv-pelican
+git init
+gh repo create
 </code></pre></div>
 
 
 <p>Notice the <em>gh</em> command. If you don't use the GitHub command line tool <em>gh</em> yet I do recommend it. It is pretty handy.</p>
 <h3>Pelican!</h3>
 <p>Now to set up my python environment and start getting Pelican set up.  I'm doing this all with python 3.9.1 because it is stable and the most recent 3.9 release that pyenv has.</p>
-<div class="highlight"><pre><span></span><code><span class="n">python</span><span class="w"> </span><span class="o">-</span><span class="n">m</span><span class="w"> </span><span class="n">venv</span><span class="w"> </span><span class="p">.</span><span class="n">venv</span><span class="w"></span>
-<span class="n">source</span><span class="w"> </span><span class="p">.</span><span class="n">venv</span><span class="o">/</span><span class="n">bin</span><span class="o">/</span><span class="n">activate</span><span class="w"></span>
-<span class="n">pip</span><span class="w"> </span><span class="n">install</span><span class="w"> </span><span class="ss">&quot;pelican[markdown]&quot;</span><span class="w"> </span><span class="n">invoke</span><span class="w"></span>
-<span class="n">pip</span><span class="w"> </span><span class="n">freeze</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">requirements</span><span class="p">.</span><span class="n">txt</span><span class="w"></span>
+<div class="highlight"><pre><span></span><code>python -m venv .venv
+source .venv/bin/activate
+pip install &quot;pelican[markdown]&quot; invoke
+pip freeze &gt; requirements.txt
 </code></pre></div>
 
 
 <p>Now for the remainder of this post I'm going to no longer talk about being in a venv, activating, deactivating, etc. If I'm in a python project, I've got the venv activated. I assume the reader is managing this aspect.</p>
 <p>I'm going to run the <em>pelican_quickstart</em> command line app and answer all the questions it poses. I'm filling out my site's details and pretty much accepting the defaults to things with defaults. <strong>Except</strong> I am not answering yes to creaking a tasks.py and Makefile. Cause I don't want a Makefile with its own syntax when I can use <strong>invoke</strong> to do all the same things to help me publish.</p>
 <p>I'm also manually creating a pages folder under the content folder generated by <em>pelican_quickstart</em> because I will want some stand-alone non-blog pages in the future like a resume.</p>
-<div class="highlight"><pre><span></span><code><span class="err">pelican_quickstart</span>
-<span class="err">mkdir content/pages</span>
+<div class="highlight"><pre><span></span><code>pelican_quickstart
+mkdir content/pages
 </code></pre></div>
 
 
 <p>This leaves me with this structure below:</p>
-<div class="highlight"><pre><span></span><code><span class="err">thebouv-pelican/</span>
-<span class="err">├── content</span>
-<span class="err">│   └── pages</span>
-<span class="err">├── output</span>
-<span class="err">├── pelicanconf.py       # Main settings file</span>
-<span class="err">├── publishconf.py       # Settings to use when ready to publish</span>
-<span class="err">└── requirements.txt     # saved earlier from pip freeze</span>
+<div class="highlight"><pre><span></span><code>thebouv-pelican/
+├── content
+│   └── pages
+├── output
+├── pelicanconf.py       # Main settings file
+├── publishconf.py       # Settings to use when ready to publish
+└── requirements.txt     # saved earlier from pip freeze
 </code></pre></div>
 
 
 <p>Now that those exist and I want to start adding content, I want to do one thing real quick. I want to make my output directory actually be a git submodule of <em>thebouv.github.io.git</em> since the generated output will be in that repo.</p>
-<div class="highlight"><pre><span></span><code><span class="err">git submodule add -f https://github.com/thebouv/thebouv.github.io output</span>
+<div class="highlight"><pre><span></span><code>git submodule add -f https://github.com/thebouv/thebouv.github.io output
 </code></pre></div>
 
 
 <p>Later I will automate commiting and pushing both this repo and the generated content up to GitHub with <em>invoke</em>.</p>
 <h3>Theme</h3>
 <p>For now I plan to use the Pelican theme called <a href="https://github.com/gilsondev/pelican-clean-blog">pelican-clean-blog</a> but fork it to my own version as <a href="https://github.com/thebouv/pelican-clean">pelican-clean</a>:</p>
-<div class="highlight"><pre><span></span><code><span class="err">git submodule add -f git@github.com:thebouv/pelican-clean.git themes/pelican-clean</span>
+<div class="highlight"><pre><span></span><code>git submodule add -f git@github.com:thebouv/pelican-clean.git themes/pelican-clean
 </code></pre></div>
 
 
 <h3>Let's fire this baby up!</h3>
 <p>This article, the one I'm writing and you're reading, is the first post in my blog. So the instructions below are so I can test this out locally and see it for the first time in all its orange glory:</p>
-<div class="highlight"><pre><span></span><code><span class="err">pelican content</span>
+<div class="highlight"><pre><span></span><code>pelican content
 </code></pre></div>
       </div>
       <div class="back-to-top">
