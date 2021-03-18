@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>thebouv - meta</title><link href="https://thebouv.com/" rel="alternate"></link><link href="https://thebouv.com/feeds/meta.atom.xml" rel="self"></link><id>https://thebouv.com/</id><updated>2021-03-16T00:00:00-05:00</updated><entry><title>How I made this site (part two)</title><link href="https://thebouv.com/how-i-made-this-site-part-two.html" rel="alternate"></link><published>2021-03-16T00:00:00-05:00</published><updated>2021-03-16T00:00:00-05:00</updated><author><name>Anthony Bouvier</name></author><id>tag:thebouv.com,2021-03-16:/how-i-made-this-site-part-two.html</id><summary type="html">&lt;p&gt;Now to finish off the tutorial on how I made this site including previewing the content and automating some tasks with invoke.&lt;/p&gt;</summary><content type="html">&lt;p&gt;Last I left off in &lt;a href="howimadethissite.md"&gt;part one&lt;/a&gt; I generated the content with &lt;code&gt;invoke build&lt;/code&gt;. I want to go over the remaining steps on how to preview the content, how I'm publishing it to GitHub pages with the submodule created previously, and also how I plan to use &lt;strong&gt;invoke&lt;/strong&gt; to automate some of this.&lt;/p&gt;
+&lt;h2&gt;Markdown Tweaks&lt;/h2&gt;
+&lt;p&gt;First before we get to previewing the content, I had to make some adjustments to how the Markdown is processed, especially for code blocks. By default pygments, which pelican uses for code highlighting, didn't mesh well with my theme. So I made sure to make my pre/code blocks have a dark background for one. I also wanted it to stop guessing the language (it was giving weird results trying to guess at the command line code blocks since they're not really a 'language' per se), and for it to recognize GitHub style fenced blocks (using backticks to surrond code blocks instead of relying on indentation).&lt;/p&gt;
+&lt;p&gt;I added this to my &lt;em&gt;pelicanconf.py&lt;/em&gt; file:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="n"&gt;MARKDOWN&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="s1"&gt;&amp;#39;extension_configs&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+        &lt;span class="s1"&gt;&amp;#39;markdown.extensions.codehilite&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;css_class&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;highlight&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;guess_lang&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;False&lt;/span&gt;&lt;span class="p"&gt;},&lt;/span&gt;
+        &lt;span class="s1"&gt;&amp;#39;markdown.extensions.fenced_code&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;{},&lt;/span&gt;
+    &lt;span class="p"&gt;},&lt;/span&gt;
+    &lt;span class="s1"&gt;&amp;#39;output_format&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;html5&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2&gt;Preview&lt;/h2&gt;
+&lt;p&gt;The &lt;code&gt;invoke build&lt;/code&gt; command looks at my &lt;em&gt;pelicanconf.py&lt;/em&gt; file for settings. Some of these settings are theme specific, but they also cover things like what is the site url, how many pages to show before paginating, and so forth. Below I will also be using &lt;em&gt;publishconf.py&lt;/em&gt; for prod settings like my Google Analytics tag and FQDN for the site url.&lt;/p&gt;
+&lt;p&gt;Now that the &lt;em&gt;output&lt;/em&gt; directory has my generated content, I want to preview it.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;invoke serve
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;This will create a simple local webserver to show you my content on http://localhost:8000 so I open Firefox and make sure everything seems to be working as expected. I click around, look for formatting weirdness, agonize internally over whether I chose the right theme or not, and then ultimately decide all is well.&lt;/p&gt;
+&lt;p&gt;That's pretty cool, buuuuuuttttt:&lt;/p&gt;
+&lt;h3&gt;Invoke&lt;/h3&gt;
+&lt;p&gt;Let's dive a bit more into the &lt;strong&gt;invoke&lt;/strong&gt; command and the default &lt;em&gt;tasks.py&lt;/em&gt; file that is created.&lt;/p&gt;
+&lt;p&gt;There are lot of built in invoke tasks in this file already like &lt;strong&gt;build&lt;/strong&gt;, &lt;strong&gt;serve&lt;/strong&gt;, and &lt;strong&gt;publish&lt;/strong&gt;. Below are my tweaks.&lt;/p&gt;
+&lt;p&gt;First I remove the &lt;strong&gt;clean&lt;/strong&gt;, and &lt;strong&gt;rebuild&lt;/strong&gt; commands by commenting them out (maybe I'll redo them in the future). This is becaues they're destructive and will remove the &lt;em&gt;output&lt;/em&gt; folder entirely, but remember that I'm using it as a submodule so it is its own git repo. Deleting the whole folder would be too destructive.&lt;/p&gt;
+&lt;p&gt;Next I need to change how the &lt;strong&gt;publish&lt;/strong&gt; task works because I'm not using rsync to publish this, I'm pushing the content of output to my &lt;strong&gt;thebouv.github.io&lt;/strong&gt; repo so that it serves automatically with GitHub Pages.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="nd"&gt;@task&lt;/span&gt;
+&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;publish&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;c&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="n"&gt;preview&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;c&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+    &lt;span class="c1"&gt;# Commit the written content to GitHub from this repo&lt;/span&gt;
+    &lt;span class="n"&gt;c&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;run&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;git add .&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="n"&gt;c&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;run&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;git commit -m &amp;quot;auto-commit from Invoke&amp;quot;&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="n"&gt;c&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;run&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;git push origin master&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+    &lt;span class="c1"&gt;# Commit the static html pages to thebouv.github.io repo&lt;/span&gt;
+    &lt;span class="n"&gt;os&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;chdir&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;CONFIG&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;deploy_path&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt; &lt;span class="c1"&gt;# my output folder&lt;/span&gt;
+    &lt;span class="n"&gt;c&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;run&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;git add .&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="n"&gt;c&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;run&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;git commit -m &amp;quot;auto-commit from Invoke&amp;quot;&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="n"&gt;c&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;run&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;git push origin master&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</content><category term="meta"></category><category term="pelican"></category><category term="python"></category><category term="invoke"></category></entry><entry><title>How I made this site (part one)</title><link href="https://thebouv.com/how-i-made-this-site-part-one.html" rel="alternate"></link><published>2021-03-14T00:00:00-06:00</published><updated>2021-03-14T00:00:00-06:00</updated><author><name>Anthony Bouvier</name></author><id>tag:thebouv.com,2021-03-14:/how-i-made-this-site-part-one.html</id><summary type="html">&lt;p&gt;First post on site, about making the site, while I'm building the site. So meta.&lt;/p&gt;</summary><content type="html">&lt;p&gt;I chose to use &lt;a href="https://getpelican.org/"&gt;pelican&lt;/a&gt; for a few reasons:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;This site is hosted for free on GitHub and that means it needs to be statically generated. &lt;/li&gt;
+&lt;li&gt;Pelican is written in python and I'm a python fanboy.&lt;/li&gt;
+&lt;li&gt;Pelican is still in active development based on the merges, issues, and discussion on its repo in GitHub.&lt;/li&gt;
+&lt;li&gt;Pelican has all the features I need plus I can supplement with other things like &lt;a href="http://www.pyinvoke.org/"&gt;invoke&lt;/a&gt; (which I just learned about and am excited to try).&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;In the final structure, I will have one repo for the pelican install (&lt;em&gt;thebouv-pelican.git&lt;/em&gt;) which will have settings, pelican files, raw assets like a post's markdown files and images. And one for the static site files (&lt;em&gt;thebouv.github.io.git&lt;/em&gt;) because GitHub only serves from root or /docs. I feel this way is cleaner and allows the I will be automating publishing with &lt;strong&gt;invoke&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;I am basing this process off of &lt;a href="https://randlow.github.io/posts/python/create-pelican-blog/"&gt;this tutorial&lt;/a&gt; but with some of my own ideas and organizational changes. Definitely fewer dependencies as I have no need for Jupyter Notebooks on this site, nor for now do I think I need typogrify or beautifulsoup as per that tutorial. I'll also be looking at the &lt;a href="https://docs.getpelican.com/en/latest/install.html"&gt;pelican quickstart&lt;/a&gt; and other pelican docs to make decisions as I go.&lt;/p&gt;
+&lt;h2&gt;Setting Up&lt;/h2&gt;
+&lt;p&gt;First I cleared all previous content out of my previous static site and leave only the README.md and CNAME files. The README will get updated during the project and CNAME is a text file required by GitHub to have thebouv.com as a custom domain.  I could have set up a totally new repo or trashed this one and restarted, but with git I don't need to and I can always roll back one day or refer to the old site if I need.&lt;/p&gt;
+&lt;h3&gt;Some git stuff&lt;/h3&gt;
+&lt;p&gt;I create my empty repo for &lt;em&gt;thebouv-pelican&lt;/em&gt; and set it up in GitHub as a remote:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;mkdir thebouv-pelican
+cd thebouv-pelican
+git init
+gh repo create
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Notice the &lt;em&gt;gh&lt;/em&gt; command. If you don't use the GitHub command line tool &lt;em&gt;gh&lt;/em&gt; yet I do recommend it. It is pretty handy.&lt;/p&gt;
+&lt;h3&gt;Pelican!&lt;/h3&gt;
+&lt;p&gt;Now to set up my python environment and start getting Pelican set up.  I'm doing this all with python 3.9.1 because it is stable and the most recent 3.9 release that pyenv has.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;python -m venv .venv
+source .venv/bin/activate
+pip install &amp;quot;pelican[markdown]&amp;quot; invoke
+pip freeze &amp;gt; requirements.txt
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Now for the remainder of this post I'm going to no longer talk about being in a venv, activating, deactivating, etc. If I'm in a python project, I've got the venv activated. I assume the reader is managing this aspect.&lt;/p&gt;
+&lt;p&gt;I'm going to run the &lt;em&gt;pelican_quickstart&lt;/em&gt; command line app and answer all the questions it poses. I'm filling out my site's details and pretty much accepting the defaults to things with defaults. Only thing is I'll be deleting the Makefile as I plan to use &lt;strong&gt;invoke&lt;/strong&gt; instead to run the tasks in tasks.py.&lt;/p&gt;
+&lt;p&gt;I'm also manually creating a pages folder under the content folder generated by &lt;em&gt;pelican_quickstart&lt;/em&gt; because I will want some stand-alone non-blog pages in the future like a resume.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;pelican_quickstart
+rm -f Makefile
+mkdir content/pages
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;This leaves me with this structure below:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;thebouv-pelican/
+├── content
+│   └── pages
+├── output
+├── pelicanconf.py       # Main settings file
+├── publishconf.py       # Settings to use when ready to publish
+└── requirements.txt     # saved earlier from pip freeze
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Now that those exist and I want to start adding content, I want to do one thing real quick. I want to make my output directory actually be a git submodule of &lt;em&gt;thebouv.github.io.git&lt;/em&gt; since the generated output will be in that repo.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;git submodule add -f git@github.com:thebouv/thebouv.github.io.git output
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Later I will automate committing and pushing both this repo and the generated content up to GitHub with &lt;em&gt;invoke&lt;/em&gt;.&lt;/p&gt;
+&lt;h3&gt;Theme&lt;/h3&gt;
+&lt;p&gt;For now I plan to use a theme that is inside this repo called &lt;a href="https://github.com/mc-buckets/brutalistpelican"&gt;brutalistpelican&lt;/a&gt; but host just a fork of the theme for my own version. I'm doing this because I don't need the rest of his pelican set up (I have my own which this post is about) and only the theme itself. After I clone their repo I move the theme folder out and set it all up as its own &lt;a href="https://github.com/thebouv/brutalist-theme"&gt;repo&lt;/a&gt;.  Then I can add the submodule like I wanted to do:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;git submodule add -f git@github.com:thebouv/brutalist-theme.git theme/brutalist-theme
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;I've definitely made some changes to the theme that I'm not going to go into detail on. One of the main things I've done is get rid of any external javascript except Google Analytics. I also tweak page width to 60em max (non-brutalist but I wanted a slightly wider content area). I'll be making more changes over time and if they're significant, I'll write about them but likely most will be slight tweaks.&lt;/p&gt;
+&lt;p&gt;Any changes I make to the theme will need to be pushed up as well to its own repo but I can do it &lt;em&gt;from&lt;/em&gt; the submodule itself which is handy and something I will be automating with &lt;strong&gt;invoke&lt;/strong&gt; in part two of this post.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;cd theme/brutal-theme
+git add --all
+git commit -m &amp;quot;some message about the changes I made&amp;quot;
+git push
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2&gt;Let's fire this baby up!&lt;/h2&gt;
+&lt;p&gt;This article, the one I'm writing and you're reading, is the first post in my blog. So the instructions below are so I can test this out locally and see it for the first time in all its simple glory:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;invoke build
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;This statically generates all the content and uses the theme to style it. Then it puts all those static files in output which you'll recall is a submodule. Then I can go into that folder add all the output to git and push it up. And since it is set up to be hosted by GitHub once this output is pushed up, my site will appear here at https://thebouv.com&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;cd output
+git add --all
+git commit -m &amp;quot;auto-generated output from pelican&amp;quot;
+git push
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h3&gt;Next time&lt;/h3&gt;
+&lt;p&gt;Okay, realize this is getting long and I have more to do but I've detailed everything that has gotten the site to this point.  Well, besides the fact that I switched themes like 5 times but I didn't need to document that part. ;)&lt;/p&gt;</content><category term="meta"></category><category term="pelican"></category><category term="python"></category></entry></feed>
