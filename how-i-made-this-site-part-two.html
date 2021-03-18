@@ -83,7 +83,7 @@
           </h2>
         </header>
       <div class="content">
-         <p>Last I left off in <a href="howimadethissite.md">part one</a> I generated the content with <code>invoke build</code>. I want to go over the remaining steps on how to preview the content, how I'm publishing it to GitHub pages with the submodule created previously, and also how I plan to use <strong>invoke</strong> to automate some of this.</p>
+         <p>Last I left off in <a href="how-i-made-this-site-part-one.html">part one</a> I generated the content with <code>invoke build</code>. I want to go over the remaining steps on how to preview the content, how I'm publishing it to GitHub pages with the submodule created previously, and also how I plan to use <strong>invoke</strong> to automate some of this.</p>
 <h2>Markdown Tweaks</h2>
 <p>First before we get to previewing the content, I had to make some adjustments to how the Markdown is processed, especially for code blocks. By default pygments, which pelican uses for code highlighting, didn't mesh well with my theme. So I made sure to make my pre/code blocks have a dark background for one. I also wanted it to stop guessing the language (it was giving weird results trying to guess at the command line code blocks since they're not really a 'language' per se), and for it to recognize GitHub style fenced blocks (using backticks to surrond code blocks instead of relying on indentation).</p>
 <p>I added this to my <em>pelicanconf.py</em> file:</p>
