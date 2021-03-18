@@ -119,9 +119,9 @@
     <span class="c1"># Commit the written content to GitHub from this repo</span>
     <span class="n">os</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="n">CONFIG</span><span class="p">[</span><span class="s1">&#39;deploy_path&#39;</span><span class="p">])</span>
     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;In Directory: </span><span class="si">{</span><span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">()</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
-    <span class="c1"># c.run(&#39;git add .&#39;)</span>
-    <span class="c1"># c.run(&#39;git commit -m &quot;auto-commit output from Invoke&quot;&#39;)</span>
-    <span class="c1"># c.run(&#39;git push origin master&#39;)</span>
+    <span class="n">c</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="s1">&#39;git add .&#39;</span><span class="p">)</span>
+    <span class="n">c</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="s1">&#39;git commit -m &quot;auto-commit output from Invoke&quot;&#39;</span><span class="p">)</span>
+    <span class="n">c</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="s1">&#39;git push origin master&#39;</span><span class="p">)</span>
 
 <span class="nd">@task</span><span class="p">(</span><span class="n">publish_output</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">publish</span><span class="p">(</span><span class="n">c</span><span class="p">):</span>
