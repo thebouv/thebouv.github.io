@@ -115,13 +115,13 @@
 <span class="k">def</span> <span class="nf">publish</span><span class="p">(</span><span class="n">c</span><span class="p">):</span>
     <span class="n">pelican_run</span><span class="p">(</span><span class="s1">&#39;-s </span><span class="si">{settings_publish}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="o">**</span><span class="n">CONFIG</span><span class="p">))</span>
 
-    <span class="c1"># Commit the written content to GitHub from this repo</span>
+    <span class="c1"># Commit the static html pages to thebouv.github.io repo</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="n">CONFIG</span><span class="p">[</span><span class="s1">&#39;deploy_path&#39;</span><span class="p">])</span> <span class="c1"># my output folder</span>
     <span class="n">c</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="s1">&#39;git add .&#39;</span><span class="p">)</span>
     <span class="n">c</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="s1">&#39;git commit -m &quot;auto-commit from Invoke&quot;&#39;</span><span class="p">)</span>
     <span class="n">c</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="s1">&#39;git push origin master&#39;</span><span class="p">)</span>
 
-    <span class="c1"># Commit the static html pages to thebouv.github.io repo</span>
-    <span class="n">os</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="n">CONFIG</span><span class="p">[</span><span class="s1">&#39;deploy_path&#39;</span><span class="p">])</span> <span class="c1"># my output folder</span>
+    <span class="c1"># Commit the written content to GitHub from this repo</span>
     <span class="n">c</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="s1">&#39;git add .&#39;</span><span class="p">)</span>
     <span class="n">c</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="s1">&#39;git commit -m &quot;auto-commit from Invoke&quot;&#39;</span><span class="p">)</span>
     <span class="n">c</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="s1">&#39;git push origin master&#39;</span><span class="p">)</span>
