@@ -69,11 +69,12 @@
         <div class="page" role="main">
   <div class="article" role="article">
     <article>
+      <article>
         <footer>
             <a name="top"></a>
             <p>
-              <time datetime=" 2021-03-15 00:00:00-05:00">
-                <script>document.write(moment('2021-03-15 00:00:00-05:00').format('LL'));</script>
+              <time datetime="Mon 15 March 2021">
+                Mon 15 March 2021
               </time>
             </p>
         </footer>
@@ -135,10 +136,20 @@
 
 
 <p>I only need to run <code>invoke publish</code> and the <em>output</em> directory is refreshed with my new generated site with prod settings from <em>publishconf.py</em>. Then the <strong>thebouv.github.io</strong> repo gets an auto-commit and push. Followed by <strong>thebouv-pelican</strong> receiving an auto-commit as well (since the submodule has updated, this step commits updating the submodule to point to the new commit SHA of <strong>thebouv.github.io</strong>).</p>
+<h2>But wait, there's more</h2>
+<p>I noticed in the default <em>task.py</em> file that there is a livereload option. I had to try it out by installing the <strong>livereload</strong> module and then invoking the task.</p>
+<div class="highlight"><pre><span></span><code>pip install livereload
+pip freeze &gt; requirements.txt
+invoke livereload
+</code></pre></div>
+
+
+<p>Now the browser nicely rereshes for me automatically as I edit and save. That's pretty damn handy.</p>
       </div>
       <div class="back-to-top">
           <a href="#top">back to top</a>
       </div>
+    </article>
     </article>
   </div>
 <!-- end article -->
