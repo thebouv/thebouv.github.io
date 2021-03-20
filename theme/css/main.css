@@ -82,31 +82,17 @@ section, article, header, footer, nav, aside, hgroup {
 /* FONTS */
 body {
   font-family: "Lato", sans-serif;
+  display: flex;
+  flex-direction: column;
 }
 
 /* END FONTS */
 /* MAIN CONTENT CONTAINER */
 .page {
+  padding: 20px;
   max-width: 60em;
-  /* 680/16 = 42.5 */
-  margin: auto;
   text-align: center;
   line-height: 1.5;
-}
-@media (min-width: 55em) {
-  .page {
-    padding-left: 30%;
-  }
-}
-@media (min-width: 65em) {
-  .page {
-    padding-left: 20%;
-  }
-}
-@media (min-width: 75em) {
-  .page {
-    padding-left: 0;
-  }
 }
 
 /* END MAIN CONTENT CONTAINER */
@@ -121,37 +107,37 @@ a:hover {
 
 /* END LINKS */
 /* NAVIGATION */
+div#masthead{
+  width: 100%;
+  padding-left: 1em;
+  padding-top: 1em;
+}
 div#masthead img {
-  display: inline-block;
-  max-width: 20%;
-  padding: 1em;
-  height: auto;
+  max-width: 30%;
 }
-@media (min-width: 37.5em) {
-  div#masthead img {
-    max-width: 10%;
-  }
+div#masthead header {
+  display: flex;
+  flex-direction: row;
 }
-@media (min-width: 55em) {
-  div#masthead img {
-    display: block;
-    max-width: 60%;
-    padding: 0;
-  }
-}
-@media (min-width: 65em) {
-  div#masthead img {
-    max-width: 50%;
-  }
+div#masthead header div {
+  width: 50%;
+  text-align: center;
 }
 @media (min-width: 55em) {
   div#masthead {
-    position: fixed;
-    max-width: 20%;
-    padding-left: 4em;
-    padding-top: 5%;
+    width: 20%;
+  }
+  div#masthead img {
+    max-width: 80%;
+  }
+  div#masthead header {
+    flex-direction: column;
   }
 }
+
+
+
+
 div#masthead nav#menu {
   clear: both;
   -webkit-transition: all 0.3s ease-out;
@@ -163,6 +149,9 @@ div#masthead nav#menu {
   max-height: 0;
 }
 @media (min-width: 55em) {
+  body {
+    flex-direction: row;
+  }
   div#masthead nav#menu {
     max-height: none;
     padding-top: 15%;
@@ -199,11 +188,11 @@ div#masthead nav#menu li a {
   }
 }
 div#masthead a#menu-link {
-  float: right;
   display: block;
   padding: 1em;
   line-height: 4em;
-  font-size: 1.2em;
+  font-size: 2.2em;
+  text-decoration: none;
 }
 @media (min-width: 55em) {
   div#masthead a#menu-link {
@@ -286,14 +275,9 @@ footer p {
 }
 .article article {
   display: inline-block;
-  width: 85%;
-  /* results in ~60-70 characters per line */
   text-align: left;
   line-height: 1.75;
   padding-top: 6em;
-  /* Article published date*/
-  /*Article Header */
-  /* Article content styles */
 }
 .article article footer {
   margin-bottom: 0;
@@ -307,19 +291,13 @@ footer p {
 }
 .article article header h2 {
   font-size: 2em;
-  /* 32/16 = 2*/
   padding-bottom: 1em;
   font-weight: 900;
   text-align: center;
 }
 .article article .content {
   font-size: 1.125em;
-  /* 18/16 = 1.125 */
   font-weight: 300;
-  /* article headers */
-  /* article lists */
-  /* italics */
-  /* code blocks */
 }
 .article article .content p {
   padding-bottom: 1.5em;
@@ -474,25 +452,4 @@ footer p {
   margin: 2em auto;
 }
 
-/* DISQUS COMMENTS */
-#disqus_thread {
-  margin-bottom: 10em;
-}
 
-/* GRAVATARS */
-.gravatar {
-  border-radius: 50%;
-}
-
-/* END GRAVATARS */
-/* EMOJIS */
-img.emoji {
-  margin: 0;
-  vertical-align: -0.3em;
-  display: inline;
-  padding-right: 0.5em;
-}
-
-/* END EMOJIS */
-
-/*# sourceMappingURL=main.css.map */
