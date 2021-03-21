@@ -89,7 +89,6 @@ body {
 /* END FONTS */
 /* MAIN CONTENT CONTAINER */
 .page {
-  padding: 20px;
   max-width: 60em;
   text-align: center;
   line-height: 1.5;
@@ -108,20 +107,30 @@ a:hover {
 /* END LINKS */
 /* NAVIGATION */
 div#masthead{
-  width: 100%;
+  /* width: 100%;
   padding-left: 1em;
-  padding-top: 1em;
+  padding-top: 1em; */
 }
+
 div#masthead img {
-  max-width: 30%;
+  max-width: 100%;
+  max-height: 220px;
 }
+
 div#masthead header {
   display: flex;
   flex-direction: row;
 }
+
 div#masthead header div {
   width: 50%;
   text-align: center;
+}
+
+.logolink {
+  display: block;
+  font-size: 2.2em;
+  text-decoration: none;
 }
 @media (min-width: 55em) {
   div#masthead {
