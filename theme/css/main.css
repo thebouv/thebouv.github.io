@@ -145,7 +145,12 @@ div#masthead header div {
 }
 
 
-
+div.content img {
+  max-width: 75%;
+  padding: 5px;
+  background-color: #abb4b9;
+  border: 1px solid #c65d09;
+}
 
 div#masthead nav#menu {
   clear: both;

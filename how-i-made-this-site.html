@@ -25,8 +25,6 @@
 <meta property="og:description" content="" />
         <!-- favicon -->
         <link rel="icon" type="image/png" href="/images/thebouv.jpg">
-        <!-- moment.js for date formatting -->
-        <script src="/theme/js/moment.js"></script>
         <!-- css -->
         <link rel="stylesheet" type="text/css" href="/theme/css/main.css" />
         <link rel="stylesheet" type="text/css" href="/theme/css/pygment.css" />
@@ -70,9 +68,9 @@
         <footer>
             <a name="top"></a>
             <p>
-              <time datetime=" 2021-03-15 00:00:00-05:00">
-                <script>document.write(moment('2021-03-15 00:00:00-05:00').format('LL'));</script>
-              </time>
+              <time datetime="{{ article.locale_date }}">
+                {{ article.locale_date }}
+            </time>
             </p>
         </footer>
         <header>
