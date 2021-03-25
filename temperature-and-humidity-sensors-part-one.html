@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-55712845-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-55712845-1');
+</script>
+        <title>thebouv</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta charset="utf-8" />
+        <!-- twitter card metadata -->
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://thebouv.com/images/thebouv.jpg">
+<meta name="twitter:site" content="">
+<meta name="twitter:title" content="Temperature and Humidity Sensors (part one)">
+<meta name="twitter:description" content="">
+        <!-- OG Tags -->
+<meta property="og:url" content="https://thebouv.com/temperature-and-humidity-sensors-part-one.html"/>
+<meta property="og:title" content="thebouv | Temperature and Humidity Sensors (part one)" />
+<meta property="og:description" content="" />
+        <!-- favicon -->
+        <link rel="icon" type="image/png" href="https://thebouv.com/images/thebouv.jpg">
+        <!-- moment.js for date formatting -->
+        <script src="https://thebouv.com/theme/js/moment.js"></script>
+        <!-- css -->
+        <link rel="stylesheet" type="text/css" href="https://thebouv.com/theme/css/main.css" />
+        <link rel="stylesheet" type="text/css" href="https://thebouv.com/theme/css/pygment.css" />
+		<link href="https://thebouv.com/theme/css/icons.fallback.css" rel="stylesheet"></noscript>
+        <!-- menu toggle javascript -->
+        <script type="text/javascript">
+            document.addEventListener("DOMContentLoaded", initMenu);
+            
+            function initMenu(){
+                var menu = document.getElementById("menu");
+                var menulink = document.getElementById("menu-link");
+                menulink.addEventListener("click", function toggleMenu(){
+                        window.event.preventDefault();
+                        menulink.classList.toggle('active');
+                        menu.classList.toggle('active');              
+                    });
+            };
+        </script>
+
+
+    <meta name="tags" content="homelab" />
+    <meta name="tags" content="raspberrypi" />
+
+</head>
+<body>
+    <div role="banner" id="masthead">
+        <header>
+            <div><a class="logolink" href="/"><img src="https://thebouv.com/images/thebouv.jpg" alt="headshot of Anthony Bouvier"></a></div>
+            <div>
+                <a href="#menu" id="menu-link">&equiv;</a>
+                <nav id="menu">
+                    <ul>
+                            <li><a href="https://thebouv.com/pages/about.html">about</a></li>
+                            <li><a href="/tags">tags</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </header>
+    </div>
+        <div class="page" role="main">
+  <div class="article" role="article">
+    <article>
+        <footer>
+            <a name="top"></a>
+            <p>
+              <time datetime="Thu 18 March 2021">
+                Thu 18 March 2021
+              </time>
+            </p>
+        </footer>
+        <header>
+          <h2>
+            Temperature and Humidity Sensors (part one)
+          </h2>
+        </header>
+      <div class="content">
+         <h2>Setting Up</h2>
+<p>I have a home from 1914 which has a lot of charm and a lot of issues. One of which is the need to constantly pay attention to the humidity levels and temperature in all floors, finished and unfinished, in the house. This project of my homelab will cover the hardware and custom software I write for it.</p>
+<h3>Hardware</h3>
+<p>4x Raspberry Pi Zero WH (just like the W, but with pre-soldered headers on the GPIO)<br>
+4x Raspberry Pi official zero w cases
+4x Raspberry Pi official power supplies
+4x Gigastone 16gb MicroSDHC</p>
+<h3>Operating System</h3>
+<p>Though I wish I could use Ubuntu LTS on the Pi Zero W, it doesn't seem to be supported or I at least haven't been able to find out how to boot it. Like my pihole project for the lab, I'm using the most recent official Raspberry Pi OS Lite (because I don't want a desktop environment on this headless computer). And of course I use the Raspberry Pi Imager -- it's just really convenient.</p>
+<p>After I image the SD card I make a couple changes to the config.txt file on the card itself from the host machine I did the imaging from.  This is so I can set the gpu mem split and disable bluetooth.</p>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>Note: when the Raspberry Pi imager is done it unmounts the SD card, so you'll need to plug it back in to your host machine to edit the config.txt file.  On my Mac, it mounts as <em>boot</em>.</p>
+</blockquote>
+</blockquote>
+</blockquote>
+<p>I add these two lines config.txt. There are a couple of lines that already set dtoverlay that are commented out, so I just put both of these in that area:  </p>
+<div class="highlight"><pre><span></span><code>gpu_mem=16
+dtoverlay=disable-bt
+</code></pre></div>
+
+
+<h3>Wi-Fi</h3>
+<p>I also want to go ahead and set up the wifi on the pi zero so that when I turn it on it automatically connects.</p>
+<p>Following this <a href="https://learn.adafruit.com/raspberry-pi-zero-creation/text-file-editing">tutorial</a> I create the <em>wpa_supplicant.conf</em> file on the root level of the boot drive while the SD is still connected.</p>
+<h3>SSH</h3>
+<p>SSH is disabled by default so since I want to log in soon after booting it and stay headless, I merely need to add a blank file named <em>ssh</em> to the root level of the ssd that I still have mounted.</p>
+<p>Once I've done that I eject the SD card and install it into the pi zero.</p>
+<h2>First Boot</h2>
+<p>After I first boot, I want to make sure to make some changes to each device. There's probably a way to get fancy and make this super repeatable, but I'm not installing 100 sensors; I'm installing 4.</p>
+<h3>Wrap Up Setup</h3>
+<p>I find the device on my network by looking at my Unifi OS that shows the whole network as a map and I just found the device and ip there, but I could also scan the network from the command line and look for Raspberry Pi MAC addresses:</p>
+<div class="highlight"><pre><span></span><code>arp -a | grep -i &quot;b8:27:eb\|dc:a6:32&quot;
+</code></pre></div>
+
+
+<p>Or if you're on a Mac or a Windows machine that has Bonjour set up you might be able to talk to it at its default hostname on .local via <em>raspberrypi.local</em></p>
+<div class="highlight"><pre><span></span><code>ssh pi@ip.address.you.found
+# or 
+ssh pi@raspberrypi.local
+</code></pre></div>
+
+
+<blockquote>
+<blockquote>
+<blockquote>
+<p>WARNING: If you use ssh pi@raspberrypi.local more than once because you're setting up multiple sensors, keep in mind ssh is going to complain that raspberrypi.local doesn't match the fingerprint from the last time you did it. Cause each device you set up is unique, but ssh doesn't know that. So I suggest using the IP because it is more likely to be different. And below we're giving each their own hostname anyway.</p>
+</blockquote>
+</blockquote>
+</blockquote>
+<p>Change the default password (always a smart thing to do):</p>
+<div class="highlight"><pre><span></span><code>passwd
+</code></pre></div>
+
+
+<p>Update apt and upgrade the OS packages:</p>
+<div class="highlight"><pre><span></span><code>sudo apt update &amp;&amp; sudo apt upgrade -y
+</code></pre></div>
+
+
+<p>Update the hostname. I'm going with a naming scheme of 'temphum1', 'temphum2', etc.</p>
+<div class="highlight"><pre><span></span><code>sudo vi /etc/hostname
+</code></pre></div>
+
+
+<p>And now let's shut it down for now because we're going to be installing the sensor and doing some soldering next before we turn this device back on.</p>
+<p>The part two of this post will be abour the physical aspects of the project like testing out on a breadboard and soldering the real thing together.</p>
+      </div>
+      <div class="back-to-top">
+          <a href="#top">back to top</a>
+      </div>
+    </article>
+  </div>
+<!-- end article -->
+                <footer>
+                    <div class="icons">
+                        <a href="https://twitter.com/thebouv" target="_blank"><div class="icon-twitter icon"></div></a>
+                        <a href="https://github.com/thebouv" target="_blank"><div class="icon-github icon"></div></a>
+                    </div>
+                    <p>© Anthony Bouvier</p>
+                </footer>
+        </div>
+</body>
+</html>
