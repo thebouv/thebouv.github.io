@@ -95,13 +95,11 @@
 <span class="p">}</span>
 </code></pre></div>
 
-
 <h2>Preview</h2>
 <p>The <code>invoke build</code> command looks at my <em>pelicanconf.py</em> file for settings. Some of these settings are theme specific, but they also cover things like what is the site url, how many pages to show before paginating, and so forth. Below I will also be using <em>publishconf.py</em> for prod settings like my Google Analytics tag and FQDN for the site url.</p>
 <p>Now that the <em>output</em> directory has my generated content, I want to preview it.</p>
 <div class="highlight"><pre><span></span><code>invoke serve
 </code></pre></div>
-
 
 <p>This will create a simple local webserver to show you my content on http://localhost:8000 so I open Firefox and make sure everything seems to be working as expected. I click around, look for formatting weirdness, agonize internally over whether I chose the right theme or not, and then ultimately decide all is well.</p>
 <p>That's pretty cool, buuuuuuttttt:</p>
@@ -132,7 +130,6 @@
     <span class="n">c</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="s1">&#39;git push origin master&#39;</span><span class="p">)</span>
 </code></pre></div>
 
-
 <p>I only need to run <code>invoke publish</code> and the <em>output</em> directory is refreshed with my new generated site with prod settings from <em>publishconf.py</em>. Then the <strong>thebouv.github.io</strong> repo gets an auto-commit and push. Followed by <strong>thebouv-pelican</strong> receiving an auto-commit as well (since the submodule has updated, this step commits updating the submodule to point to the new commit SHA of <strong>thebouv.github.io</strong>).</p>
 <h2>But wait, there's more</h2>
 <p>I noticed in the default <em>task.py</em> file that there is a livereload option. I had to try it out by installing the <strong>livereload</strong> module and then invoking the task.</p>
@@ -140,7 +137,6 @@
 pip freeze &gt; requirements.txt
 invoke livereload
 </code></pre></div>
-
 
 <p>Now the browser nicely refreshes for me automatically as I edit and save. That's pretty damn handy.</p>
       </div>

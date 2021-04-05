@@ -103,7 +103,6 @@
 dtoverlay=disable-bt
 </code></pre></div>
 
-
 <h3>Wi-Fi</h3>
 <p>I also want to go ahead and set up the wifi on the pi zero so that when I turn it on it automatically connects.</p>
 <p>Following this <a href="https://learn.adafruit.com/raspberry-pi-zero-creation/text-file-editing">tutorial</a> I create the <em>wpa_supplicant.conf</em> file on the root level of the boot drive while the SD is still connected.</p>
@@ -117,13 +116,11 @@ dtoverlay=disable-bt
 <div class="highlight"><pre><span></span><code>arp -a | grep -i &quot;b8:27:eb\|dc:a6:32&quot;
 </code></pre></div>
 
-
 <p>Or if you're on a Mac or a Windows machine that has Bonjour set up you might be able to talk to it at its default hostname on .local via <em>raspberrypi.local</em></p>
 <div class="highlight"><pre><span></span><code>ssh pi@ip.address.you.found
 # or 
 ssh pi@raspberrypi.local
 </code></pre></div>
-
 
 <blockquote>
 <blockquote>
@@ -136,16 +133,13 @@ ssh pi@raspberrypi.local
 <div class="highlight"><pre><span></span><code>passwd
 </code></pre></div>
 
-
 <p>Update apt and upgrade the OS packages:</p>
 <div class="highlight"><pre><span></span><code>sudo apt update &amp;&amp; sudo apt upgrade -y
 </code></pre></div>
 
-
 <p>Update the hostname. I'm going with a naming scheme of 'temphum1', 'temphum2', etc.</p>
 <div class="highlight"><pre><span></span><code>sudo vi /etc/hostname
 </code></pre></div>
-
 
 <p>And now let's shut it down for now because we're going to be installing the sensor and doing some soldering next before we turn this device back on.</p>
 <p>The part two of this post will be abour the physical aspects of the project like testing out on a breadboard and soldering the real thing together.</p>
