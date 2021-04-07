@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-55712845-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-55712845-1');
+</script>
+        <title>thebouv</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta charset="utf-8" />
+        <!-- twitter card metadata -->
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://thebouv.com/images/thebouv.jpg">
+<meta name="twitter:site" content="">
+<meta name="twitter:title" content="Changing GitHub Enterprise users from LDAP to local">
+<meta name="twitter:description" content="">
+        <!-- OG Tags -->
+<meta property="og:url" content="https://thebouv.com/changing-github-enterprise-users-from-ldap-to-local.html"/>
+<meta property="og:title" content="thebouv | Changing GitHub Enterprise users from LDAP to local" />
+<meta property="og:description" content="" />
+        <!-- favicon -->
+        <link rel="icon" type="image/png" href="https://thebouv.com/images/thebouv.jpg">
+        <!-- css -->
+        <link rel="stylesheet" type="text/css" href="https://thebouv.com/theme/css/main.css" />
+        <link rel="stylesheet" type="text/css" href="https://thebouv.com/theme/css/pygment.css" />
+		<link href="https://thebouv.com/theme/css/icons.fallback.css" rel="stylesheet"></noscript>
+        <!-- menu toggle javascript -->
+        <script type="text/javascript">
+            document.addEventListener("DOMContentLoaded", initMenu);
+            
+            function initMenu(){
+                var menu = document.getElementById("menu");
+                var menulink = document.getElementById("menu-link");
+                menulink.addEventListener("click", function toggleMenu(){
+                        window.event.preventDefault();
+                        menulink.classList.toggle('active');
+                        menu.classList.toggle('active');              
+                    });
+            };
+        </script>
+
+
+    <meta name="tags" content="github" />
+    <meta name="tags" content="devops" />
+
+</head>
+<body>
+    <div role="banner" id="masthead">
+        <header>
+            <div><a class="logolink" href="/"><img src="https://thebouv.com/images/thebouv.jpg" alt="headshot of Anthony Bouvier"></a></div>
+            <div>
+                <a href="#menu" id="menu-link">&equiv;</a>
+                <nav id="menu">
+                    <ul>
+                            <li><a href="https://thebouv.com/pages/about.html">about</a></li>
+                            <li><a href="/tags">tags</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </header>
+    </div>
+        <div class="page" role="main">
+  <div class="article" role="article">
+    <article>
+        <footer>
+            <a name="top"></a>
+            <p>
+              <time datetime="Mon 05 April 2021">
+                Mon 05 April 2021
+              </time>
+            </p>
+        </footer>
+        <header>
+          <h2>
+            Changing GitHub Enterprise users from LDAP to local
+          </h2>
+        </header>
+      <div class="content">
+         <h2>What?</h2>
+<p>The company I work for recently split off our entire software engineering team, part of other teams, and backoffice people into a stand alone independent software vendor. For the time being we're sharing a single GitHub Enterprise instance on prem and as part of the transition we've moved the new company staff off to their own Active Directory.</p>
+<p>Unlike other tooling I have in place like Jenkins or Harbor, GitHub Enterprise only supports using a single AD/LDAP server (version 3.0.4 as of the publishing of this post). So the 6 or so digital marketing developers left behind at the parent company have to be converted from LDAP auth to local authentication.</p>
+<p>Thankfully this is possible with GitHub Enterprise via this setting:</p>
+<p><img alt="screenshot of github admin settings to allow local account creation along side ldap accounts" src="images/github-enterprise-ldap-local-setting.png"></p>
+<h2>But?</h2>
+<p>The issue is that accounts that were previously LDAP are flagged as that and this setting only allows for new accounts.</p>
+<p>I asked GitHub for instructions on how to convert those accounts and they sent me some ghe-console commands to run. And here is what they sent me:</p>
+<blockquote>
+<p>If enabled, temporarily disable LDAP sync to prevent it from re-writing the LDAP associations.</p>
+<p>Connect to the server via SSH. Destroy the LDAP mapping for the users you'd like to switch to built-in authentication and set a default password for those users: (replace USERNAME with the user's actual GitHub username, and replace NEW_PASSWORD with a temporary password)</p>
+</blockquote>
+<div class="highlight"><pre><span></span><code>  <span class="n">ghe</span><span class="o">-</span><span class="n">console</span> <span class="o">-</span><span class="n">y</span>
+  <span class="no">User</span><span class="o">.</span><span class="n">find_by_login</span><span class="p">(</span><span class="s2">&quot;USERNAME&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">ldap_mapping</span><span class="o">.</span><span class="n">destroy</span>
+  <span class="n">pass</span> <span class="o">=</span> <span class="s2">&quot;NEW_PASSWORD&quot;</span>
+  <span class="n">user</span> <span class="o">=</span> <span class="no">User</span><span class="o">.</span><span class="n">find_by_login</span><span class="p">(</span><span class="s2">&quot;USERNAME&quot;</span><span class="p">)</span>
+  <span class="n">user</span><span class="o">.</span><span class="n">update_attributes</span><span class="p">(</span><span class="ss">password</span><span class="p">:</span> <span class="n">pass</span><span class="p">,</span> <span class="ss">password_confirmation</span><span class="p">:</span> <span class="n">pass</span><span class="p">)</span>
+  <span class="nb">exit</span>
+</code></pre></div>
+
+<blockquote>
+<p>Ensure these users are not in the LDAP directory before they attempt to login again.  </p>
+<p>Re-enable LDAP sync if necessary.</p>
+<p>Instruct users to update passwords after logging in.</p>
+</blockquote>
+<p>No doubt this is from their support team's knowledgebase. The problem is it throws errors on trying to use the code as-is.</p>
+<p>Of course, I only had a few tracebacks to go off of like this one for <code>update_attributes</code>:</p>
+<div class="highlight"><pre><span></span><code>Traceback (most recent call last):
+        3: from /github/script/console:92:in `&lt;main&gt;&#39;
+        2: from (irb):4
+        1: from /github/vendor/gems/2.7.1/ruby/2.7.0/gems/activemodel-6.1.0.rc1.8389f99/lib/active_model/attribute_methods.rb:469:in `method_missing&#39;
+NoMethodError (undefined method `update_attributes&#39; for #&lt;User:0x000000000000&gt;)
+Did you mean?  update_attribute
+</code></pre></div>
+
+<p>So then I tried to change it to <code>update_attribute</code>:</p>
+<div class="highlight"><pre><span></span><code>Traceback (most recent call last):
+        4: from /github/script/console:92:in `&lt;main&gt;&#39;
+        3: from (irb):4
+        2: from (irb):5:in `rescue in irb_binding&#39;
+        1: from /github/vendor/gems/2.7.1/ruby/2.7.0/gems/activerecord-6.1.0.rc1.8389f99/lib/active_record/persistence.rb:612:in `update_attribute&#39;
+ArgumentError (wrong number of arguments (given 1, expected 2))
+</code></pre></div>
+
+<p>Damn. Well, it sorta <em>looks</em> like I'm sending two arguments instead of one, so what's going on?</p>
+<p>Since I now know we're dealing with Ruby in the <em>ghe-console</em> I start looking up some docs and find out that <strong>update_attribute</strong> only does one attribute at a time and whatever format I'm sending it doesn't like.</p>
+<p>I also look up <strong>update_attributes</strong> and find out it was deprecated. You only need <strong>update</strong> in this case. So I try <strong>update</strong> with the same params and it worked:</p>
+<div class="highlight"><pre><span></span><code><span class="n">user</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="ss">password</span><span class="p">:</span> <span class="n">pass</span><span class="p">,</span> <span class="ss">password_confirmation</span><span class="p">:</span> <span class="n">pass</span><span class="p">)</span>
+</code></pre></div>
+
+<p>Or what I originally tried works too using a different syntax for sending the attributes that I saw in the <strong>update</strong> documentation:</p>
+<div class="highlight"><pre><span></span><code><span class="n">user</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="ss">:password</span> <span class="o">=&gt;</span> <span class="n">pass</span><span class="p">,</span> <span class="ss">:password_confirmation</span> <span class="o">=&gt;</span> <span class="n">pass</span><span class="p">)</span>
+</code></pre></div>
+
+<h2>Gut?</h2>
+<p>Mostly just chose that subtitle to rhyme with the others, but actually using your gut to do such debugging is something I recommend. The longer you're in this business, the more experience you have running up against just weird scenarios like the above. My vendor gave me syntax that was actually out of date, but I used the info given to me for a language I have zero experience with to debug what to do next.</p>
+<p>And I wrote them back to let them know to update their knowledgebase.</p>
+<p>So follow your gut! Know how to look up docs even for things you don't know about or langauges you're unfamiliar with. </p>
+<p>Deduce. Experiment. Test. Repeat. It becomes second nature.</p>
+      </div>
+      <div class="back-to-top">
+          <a href="#top">back to top</a>
+      </div>
+    </article>
+  </div>
+<!-- end article -->
+                <footer>
+                    <div class="icons">
+                        <a href="https://twitter.com/thebouv" target="_blank"><div class="icon-twitter icon"></div></a>
+                        <a href="https://github.com/thebouv" target="_blank"><div class="icon-github icon"></div></a>
+                    </div>
+                    <p>© Anthony Bouvier</p>
+                </footer>
+        </div>
+</body>
+</html>
