@@ -1,87 +1,57 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <!-- Global site tag (gtag.js) - Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-55712845-1"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'UA-55712845-1');
-</script>
-        <title>thebouv</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta charset="utf-8" />
-        <!-- twitter card metadata -->
-<meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://thebouv.com/images/thebouv.jpg">
-<meta name="twitter:site" content="">
-<meta name="twitter:title" content="First rack for my homelab">
-<meta name="twitter:description" content="">
-        <!-- OG Tags -->
-<meta property="og:url" content="https://thebouv.com/first-rack-for-my-homelab.html"/>
-<meta property="og:title" content="thebouv | First rack for my homelab" />
-<meta property="og:description" content="" />
-        <!-- favicon -->
-        <link rel="icon" type="image/png" href="https://thebouv.com/images/thebouv.jpg">
-        <!-- css -->
-        <link rel="stylesheet" type="text/css" href="https://thebouv.com/theme/css/main.css" />
-        <link rel="stylesheet" type="text/css" href="https://thebouv.com/theme/css/pygment.css" />
-		<link href="https://thebouv.com/theme/css/icons.fallback.css" rel="stylesheet"></noscript>
-        <!-- menu toggle javascript -->
-        <script type="text/javascript">
-            document.addEventListener("DOMContentLoaded", initMenu);
-            
-            function initMenu(){
-                var menu = document.getElementById("menu");
-                var menulink = document.getElementById("menu-link");
-                menulink.addEventListener("click", function toggleMenu(){
-                        window.event.preventDefault();
-                        menulink.classList.toggle('active');
-                        menu.classList.toggle('active');              
-                    });
-            };
-        </script>
-
-
-    <meta name="tags" content="homelab" />
-    <meta name="tags" content="networking" />
-
-</head>
-<body>
-    <div role="banner" id="masthead">
-        <header>
-            <div><a class="logolink" href="/"><img src="https://thebouv.com/images/thebouv.jpg" alt="headshot of Anthony Bouvier"></a></div>
-            <div>
-                <a href="#menu" id="menu-link">&equiv;</a>
-                <nav id="menu">
-                    <ul>
-                            <li><a href="https://thebouv.com/pages/about.html">about</a></li>
-                            <li><a href="/tags">tags</a></li>
-                    </ul>
-                </nav>
-            </div>
-        </header>
+  <head>
+    <title>thebouv</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Geek of All Trades. Maker and Breaker. Tinkerer and Thinker-er.">
+    <meta name="author" content="Anthony Bouvier">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:image" content="https://thebouv.com/images/thebouv.jpg">
+    <meta name="twitter:description" content="Geek of All Trades. Maker and Breaker. Tinkerer and Thinker-er.">
+    <meta name="twitter:creator" content="">
+    <meta property="og:url" content="https://thebouv.com"/>
+    <meta property="og:title" content="thebouv" />
+    <meta property="og:description" content="Geek of All Trades. Maker and Breaker. Tinkerer and Thinker-er." />
+    <!-- Styles -->
+    <link rel="stylesheet" type="text/css" href="https://thebouv.com/theme/css/paper.css" />
+    <link rel="stylesheet" type="text/css" href="https://thebouv.com/theme/css/pygment.css" />
+    <!-- Favicons -->
+    <link rel="icon" type="image/jpg" href="https://thebouv.com/images/thebouv.jpg">
+    <!-- Script -->
+    <script>
+      function setTheme() {
+        if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+          document.body.classList.add('dark');
+          return;
+        }
+      }
+    </script>
+  </head>
+  <body class="list">
+    <script>
+      setTheme();
+    </script>
+    <header class="header">
+      <nav class="nav">
+        <h1 class="logo"><a href="/">thebouv</a></h1>
+        <ul class="menu">
+          <li>
+            <a href="https://thebouv.com/pages/about.html">about</a>
+          </li>
+        </ul>
+      </nav>
+    </header>
+    <main class="main">
+<article class="post-single">
+  <header class="post-header">
+    <h1 class="post-title">First rack for my homelab</h1>
+    <div class="post-meta">
+        By Anthony Bouvier on Sat 20 March 2021
     </div>
-        <div class="page" role="main">
-  <div class="article" role="article">
-    <article>
-        <footer>
-            <a name="top"></a>
-            <p>
-              <time datetime="Sat 20 March 2021">
-                Sat 20 March 2021
-              </time>
-            </p>
-        </footer>
-        <header>
-          <h2>
-            First rack for my homelab
-          </h2>
-        </header>
-      <div class="content">
-         <p><img alt="home lab open rack with new Unifi equipment" src="images/homelab-not-pretty-yet.jpg"></p>
+  </header>
+  <div class="post-content"><p><img alt="home lab open rack with new Unifi equipment" src="images/homelab-not-pretty-yet.jpg"></p>
 <p>It ain’t pretty yet but it’s a start and it’s been mostly fun so far!</p>
 <p>I say mostly fun because running cables in a home from 1914 is a pain in the behind. A lot of plaster and lath walls makes it a challenge and though I haven't had to mess with it too much, I've been doing some planning after getting this equipment and woooooo it will be a hard fight with this old house.</p>
 <p>Equipment pictured above:<br>
@@ -92,21 +62,17 @@ Echogear 20u open rack</p>
 <p>Currently using AmpliFi to create a mesh while I wait for access points for the UDM Pro. Then I’ll just use it as a backup and store it, or see if I can set it up for my daughter's apartment.</p>
 <p>You can also see my stack of ThinkCenter tinys and my Raspberry Pi cluster. I actually plan to rack the Raspberry Pis with a mount I found made for them (either 1u for three or 3u for sideways mounting around 12-15). Not sure how I’m going to arrange the ThinkCenters yet.</p>
 <p>You can also see my tiny little pihole dns servers in their neon green cases. I love the Pi Zero form factor.</p>
-<p>In case I didn’t bring it up before the raspberry pi 4s are for a Kubernetes cluster which will be for continuous learning and experiments, but also to run some custom apps I’m building for my home. And the ThinkCenters are for a Proxmox cluster for vms, experiments, etc.</p>
-      </div>
-      <div class="back-to-top">
-          <a href="#top">back to top</a>
-      </div>
-    </article>
-  </div>
-<!-- end article -->
-                <footer>
-                    <div class="icons">
-                        <a href="https://twitter.com/thebouv" target="_blank"><div class="icon-twitter icon"></div></a>
-                        <a href="https://github.com/thebouv" target="_blank"><div class="icon-github icon"></div></a>
-                    </div>
-                    <p>© Anthony Bouvier</p>
-                </footer>
-        </div>
-</body>
+<p>In case I didn’t bring it up before the raspberry pi 4s are for a Kubernetes cluster which will be for continuous learning and experiments, but also to run some custom apps I’m building for my home. And the ThinkCenters are for a Proxmox cluster for vms, experiments, etc.</p></div>
+  <footer class="post-footer">
+    <ul class="post-tags">
+        <li><a href="https://thebouv.com/tag/homelab.html">homelab</a></li>
+        <li><a href="https://thebouv.com/tag/networking.html">networking</a></li>
+      </ul>
+  </footer>
+</article>
+    </main>
+  <footer class="footer">
+    <span>&copy; 2021 Anthony Bouvier &middot; Geek of All Trades. Maker and Breaker. Tinkerer and Thinker-er.</span>
+  </footer>
+  </body>
 </html>

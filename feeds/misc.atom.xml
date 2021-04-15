@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>thebouv - misc</title><link href="/" rel="alternate"></link><link href="/feeds/misc.atom.xml" rel="self"></link><id>/</id><updated>2021-04-05T00:00:00-05:00</updated><entry><title>Changing GitHub Enterprise users from LDAP to local</title><link href="/changing-github-enterprise-users-from-ldap-to-local.html" rel="alternate"></link><published>2021-04-05T00:00:00-05:00</published><updated>2021-04-05T00:00:00-05:00</updated><author><name>Anthony Bouvier</name></author><id>tag:None,2021-04-05:/changing-github-enterprise-users-from-ldap-to-local.html</id><summary type="html">&lt;p&gt;I needed to have most users move to a different AD/LDAP server but leave a few behind on local logins. The instructions from GitHub support had issues I had to figure out on my own.&lt;/p&gt;</summary><content type="html">&lt;h2&gt;What?&lt;/h2&gt;
+&lt;p&gt;The company I work for recently split off our entire software engineering team, part of other teams, and backoffice people into a stand alone independent software vendor. For the time being we're sharing a single GitHub Enterprise instance on prem and as part of the transition we've moved the new company staff off to their own Active Directory.&lt;/p&gt;
+&lt;p&gt;Unlike other tooling I have in place like Jenkins or Harbor, GitHub Enterprise only supports using a single AD/LDAP server (version 3.0.4 as of the publishing of this post). So the 6 or so digital marketing developers left behind at the parent company have to be converted from LDAP auth to local authentication.&lt;/p&gt;
+&lt;p&gt;Thankfully this is possible with GitHub Enterprise via this setting:&lt;/p&gt;
+&lt;p&gt;&lt;img alt="screenshot of github admin settings to allow local account creation along side ldap accounts" src="images/github-enterprise-ldap-local-setting.png"&gt;&lt;/p&gt;
+&lt;h2&gt;But?&lt;/h2&gt;
+&lt;p&gt;The issue is that accounts that were previously LDAP are flagged as that and this setting only allows for new accounts.&lt;/p&gt;
+&lt;p&gt;I asked GitHub for instructions on how to convert those accounts and they sent me some ghe-console commands to run. And here is what they sent me:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;If enabled, temporarily disable LDAP sync to prevent it from re-writing the LDAP associations.&lt;/p&gt;
+&lt;p&gt;Connect to the server via SSH. Destroy the LDAP mapping for the users you'd like to switch to built-in authentication and set a default password for those users: (replace USERNAME with the user's actual GitHub username, and replace NEW_PASSWORD with a temporary password)&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;  &lt;span class="n"&gt;ghe&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;console&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;y&lt;/span&gt;
+  &lt;span class="no"&gt;User&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;find_by_login&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;USERNAME&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;ldap_mapping&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;destroy&lt;/span&gt;
+  &lt;span class="n"&gt;pass&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;NEW_PASSWORD&amp;quot;&lt;/span&gt;
+  &lt;span class="n"&gt;user&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="no"&gt;User&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;find_by_login&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;USERNAME&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+  &lt;span class="n"&gt;user&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;update_attributes&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;password&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;pass&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;password_confirmation&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;pass&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+  &lt;span class="nb"&gt;exit&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;Ensure these users are not in the LDAP directory before they attempt to login again.  &lt;/p&gt;
+&lt;p&gt;Re-enable LDAP sync if necessary.&lt;/p&gt;
+&lt;p&gt;Instruct users to update passwords after logging in.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;No doubt this is from their support team's knowledgebase. The problem is it throws errors on trying to use the code as-is.&lt;/p&gt;
+&lt;p&gt;Of course, I only had a few tracebacks to go off of like this one for &lt;code&gt;update_attributes&lt;/code&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;Traceback (most recent call last):
+        3: from /github/script/console:92:in `&amp;lt;main&amp;gt;&amp;#39;
+        2: from (irb):4
+        1: from /github/vendor/gems/2.7.1/ruby/2.7.0/gems/activemodel-6.1.0.rc1.8389f99/lib/active_model/attribute_methods.rb:469:in `method_missing&amp;#39;
+NoMethodError (undefined method `update_attributes&amp;#39; for #&amp;lt;User:0x000000000000&amp;gt;)
+Did you mean?  update_attribute
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;So then I tried to change it to &lt;code&gt;update_attribute&lt;/code&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;Traceback (most recent call last):
+        4: from /github/script/console:92:in `&amp;lt;main&amp;gt;&amp;#39;
+        3: from (irb):4
+        2: from (irb):5:in `rescue in irb_binding&amp;#39;
+        1: from /github/vendor/gems/2.7.1/ruby/2.7.0/gems/activerecord-6.1.0.rc1.8389f99/lib/active_record/persistence.rb:612:in `update_attribute&amp;#39;
+ArgumentError (wrong number of arguments (given 1, expected 2))
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Damn. Well, it sorta &lt;em&gt;looks&lt;/em&gt; like I'm sending two arguments instead of one, so what's going on?&lt;/p&gt;
+&lt;p&gt;Since I now know we're dealing with Ruby in the &lt;em&gt;ghe-console&lt;/em&gt; I start looking up some docs and find out that &lt;strong&gt;update_attribute&lt;/strong&gt; only does one attribute at a time and whatever format I'm sending it doesn't like.&lt;/p&gt;
+&lt;p&gt;I also look up &lt;strong&gt;update_attributes&lt;/strong&gt; and find out it was deprecated. You only need &lt;strong&gt;update&lt;/strong&gt; in this case. So I try &lt;strong&gt;update&lt;/strong&gt; with the same params and it worked:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="n"&gt;user&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;update&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;password&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;pass&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;password_confirmation&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;pass&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Or what I originally tried works too using a different syntax for sending the attributes that I saw in the &lt;strong&gt;update&lt;/strong&gt; documentation:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="n"&gt;user&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;update&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:password&lt;/span&gt; &lt;span class="o"&gt;=&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;pass&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;:password_confirmation&lt;/span&gt; &lt;span class="o"&gt;=&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;pass&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h2&gt;Gut?&lt;/h2&gt;
+&lt;p&gt;Mostly just chose that subtitle to rhyme with the others, but actually using your gut to do such debugging is something I recommend. The longer you're in this business, the more experience you have running up against just weird scenarios like the above. My vendor gave me syntax that was actually out of date, but I used the info given to me for a language I have zero experience with to debug what to do next.&lt;/p&gt;
+&lt;p&gt;And I wrote them back to let them know to update their knowledgebase.&lt;/p&gt;
+&lt;p&gt;So follow your gut! Know how to look up docs even for things you don't know about or langauges you're unfamiliar with. &lt;/p&gt;
+&lt;p&gt;Deduce. Experiment. Test. Repeat. It becomes second nature.&lt;/p&gt;</content><category term="misc"></category><category term="github"></category><category term="devops"></category></entry></feed>

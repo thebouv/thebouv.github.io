@@ -1,80 +1,66 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-<!-- Global site tag (gtag.js) - Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-55712845-1"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'UA-55712845-1');
-</script>
-        <title>thebouv - Tags</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta charset="utf-8" />
-        <!-- twitter card metadata -->
-        <!-- OG Tags -->
-        <!-- favicon -->
-        <link rel="icon" type="image/png" href="https://thebouv.com/images/thebouv.jpg">
-        <!-- css -->
-        <link rel="stylesheet" type="text/css" href="https://thebouv.com/theme/css/main.css" />
-        <link rel="stylesheet" type="text/css" href="https://thebouv.com/theme/css/pygment.css" />
-		<link href="https://thebouv.com/theme/css/icons.fallback.css" rel="stylesheet"></noscript>
-        <!-- menu toggle javascript -->
-        <script type="text/javascript">
-            document.addEventListener("DOMContentLoaded", initMenu);
-            
-            function initMenu(){
-                var menu = document.getElementById("menu");
-                var menulink = document.getElementById("menu-link");
-                menulink.addEventListener("click", function toggleMenu(){
-                        window.event.preventDefault();
-                        menulink.classList.toggle('active');
-                        menu.classList.toggle('active');              
-                    });
-            };
-        </script>
-</head>
-<body>
-    <div role="banner" id="masthead">
-        <header>
-            <div><a class="logolink" href="/"><img src="https://thebouv.com/images/thebouv.jpg" alt="headshot of Anthony Bouvier"></a></div>
-            <div>
-                <a href="#menu" id="menu-link">&equiv;</a>
-                <nav id="menu">
-                    <ul>
-                            <li><a href="https://thebouv.com/pages/about.html">about</a></li>
-                            <li><a href="/tags">tags</a></li>
-                    </ul>
-                </nav>
-            </div>
-        </header>
-    </div>
-        <div class="page" role="main">
-<div class="page-title">
-        <h1>tags</h1>
-</div>
-<div class="articles">
-    <ul>
-        <li><a href="https://thebouv.com/tag/github.html">github</a> <span class="count">(1)</span></li>
-        <li><a href="https://thebouv.com/tag/devops.html">devops</a> <span class="count">(1)</span></li>
-        <li><a href="https://thebouv.com/tag/career.html">career</a> <span class="count">(1)</span></li>
-        <li><a href="https://thebouv.com/tag/homelab.html">homelab</a> <span class="count">(2)</span></li>
-        <li><a href="https://thebouv.com/tag/networking.html">networking</a> <span class="count">(1)</span></li>
-        <li><a href="https://thebouv.com/tag/raspberrypi.html">raspberrypi</a> <span class="count">(1)</span></li>
-        <li><a href="https://thebouv.com/tag/pelican.html">pelican</a> <span class="count">(2)</span></li>
-        <li><a href="https://thebouv.com/tag/python.html">python</a> <span class="count">(2)</span></li>
-        <li><a href="https://thebouv.com/tag/invoke.html">invoke</a> <span class="count">(1)</span></li>
-    </ul>
-</div>
-                <footer>
-                    <div class="icons">
-                        <a href="https://twitter.com/thebouv" target="_blank"><div class="icon-twitter icon"></div></a>
-                        <a href="https://github.com/thebouv" target="_blank"><div class="icon-github icon"></div></a>
-                    </div>
-                    <p>© Anthony Bouvier</p>
-                </footer>
-        </div>
-</body>
+  <head>
+    <title>thebouv</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Geek of All Trades. Maker and Breaker. Tinkerer and Thinker-er.">
+    <meta name="author" content="Anthony Bouvier">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:image" content="https://thebouv.com/images/thebouv.jpg">
+    <meta name="twitter:description" content="Geek of All Trades. Maker and Breaker. Tinkerer and Thinker-er.">
+    <meta name="twitter:creator" content="">
+    <meta property="og:url" content="https://thebouv.com"/>
+    <meta property="og:title" content="thebouv" />
+    <meta property="og:description" content="Geek of All Trades. Maker and Breaker. Tinkerer and Thinker-er." />
+    <!-- Styles -->
+    <link rel="stylesheet" type="text/css" href="https://thebouv.com/theme/css/paper.css" />
+    <link rel="stylesheet" type="text/css" href="https://thebouv.com/theme/css/pygment.css" />
+    <!-- Favicons -->
+    <link rel="icon" type="image/jpg" href="https://thebouv.com/images/thebouv.jpg">
+    <!-- Script -->
+    <script>
+      function setTheme() {
+        if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+          document.body.classList.add('dark');
+          return;
+        }
+      }
+    </script>
+  </head>
+  <body class="list">
+    <script>
+      setTheme();
+    </script>
+    <header class="header">
+      <nav class="nav">
+        <h1 class="logo"><a href="/">thebouv</a></h1>
+        <ul class="menu">
+          <li>
+            <a href="https://thebouv.com/pages/about.html">about</a>
+          </li>
+        </ul>
+      </nav>
+    </header>
+    <main class="main">
+<article class="post-single">
+  <header class="post-header">
+    <h1 class="post-title">tags</h1>
+  </header>
+  <p><a href="https://thebouv.com/tag/github.html">github</a> <span class="count">(1)</span></p>
+  <p><a href="https://thebouv.com/tag/devops.html">devops</a> <span class="count">(1)</span></p>
+  <p><a href="https://thebouv.com/tag/career.html">career</a> <span class="count">(1)</span></p>
+  <p><a href="https://thebouv.com/tag/homelab.html">homelab</a> <span class="count">(2)</span></p>
+  <p><a href="https://thebouv.com/tag/networking.html">networking</a> <span class="count">(1)</span></p>
+  <p><a href="https://thebouv.com/tag/raspberrypi.html">raspberrypi</a> <span class="count">(1)</span></p>
+  <p><a href="https://thebouv.com/tag/pelican.html">pelican</a> <span class="count">(2)</span></p>
+  <p><a href="https://thebouv.com/tag/python.html">python</a> <span class="count">(2)</span></p>
+  <p><a href="https://thebouv.com/tag/invoke.html">invoke</a> <span class="count">(1)</span></p>
+</article>
+    </main>
+  <footer class="footer">
+    <span>&copy; 2021 Anthony Bouvier &middot; Geek of All Trades. Maker and Breaker. Tinkerer and Thinker-er.</span>
+  </footer>
+  </body>
 </html>
