@@ -1,5 +1,92 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>thebouv - career</title><link href="/" rel="alternate"></link><link href="/feeds/career.atom.xml" rel="self"></link><id>/</id><updated>2021-04-02T00:00:00-05:00</updated><entry><title>Don't idolize Elon Musk</title><link href="/dont-idolize-elon-musk.html" rel="alternate"></link><published>2021-04-02T00:00:00-05:00</published><updated>2021-04-02T00:00:00-05:00</updated><author><name>Anthony Bouvier</name></author><id>tag:None,2021-04-02:/dont-idolize-elon-musk.html</id><summary type="html">&lt;p&gt;I responded to someone on LinkedIn shaming people for using "I don't have time" as an excuse and praising Elon Musk's overworking habits. Wanted to capture my response here as well.&lt;/p&gt;</summary><content type="html">&lt;p&gt;Let's not try to normalize working 85-100 hours a week. That's ridiculous. And shame on you for holding that up as something to aspire too. &lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>thebouv - career</title><link href="https://thebouv.com/" rel="alternate"></link><link href="https://thebouv.com/feeds/career.atom.xml" rel="self"></link><id>https://thebouv.com/</id><updated>2021-08-23T00:00:00-05:00</updated><entry><title>Setting up my new Mac</title><link href="https://thebouv.com/setting-up-my-new-mac.html" rel="alternate"></link><published>2021-08-23T00:00:00-05:00</published><updated>2021-08-23T00:00:00-05:00</updated><author><name>Anthony Bouvier</name></author><id>tag:thebouv.com,2021-08-23:/setting-up-my-new-mac.html</id><summary type="html">&lt;p&gt;Starting a new job soon and have my brand new 13" MacBook Pro sent to me. Decided to document how I'm setting it up before the gig starts.&lt;/p&gt;</summary><content type="html">&lt;p&gt;I'm starting a new job soon after 7 years at my previous company. As I was installing a few things I decided I should document what I normally do. This isn't a deeply technical article, and is really just a bunch of my opinions, but I think it'll be interesting to some.&lt;/p&gt;
+&lt;p&gt;I personally use a 15" MacBook Pro (what I'm writing this article on) and love it; though I do feel like the TouchBar is still one of the dumbest features ever added to the lineup. At least the new 13" version I have, still Intel not M1, is that it has a physical escape key. Thank gods for that -- the virtual one on my personal machine agitates me to this day.&lt;/p&gt;
+&lt;h2&gt;Let's delete a lot of stuff&lt;/h2&gt;
+&lt;h3&gt;Dock&lt;/h3&gt;
+&lt;p&gt;I'm a fan of deleting stuff. I feel like too many people keep too many things on their machines. The very first thing I do when I set up a machine is to delete software. For this machine, I immediately clear the 20+ icons in the Dock. My personal machine only has Finder, Firefox, iTerm2, and VSCode as the permanent apps -- then the Downloads folder and Trash after the divider. I don't understand having more than that as these are the apps I use the most often. Anything else is &lt;strong&gt;&amp;#x2318; + Spacebar&lt;/strong&gt; away with Spotlight Search.&lt;/p&gt;
+&lt;p&gt;&lt;img src="/images/dock.png" alt="an image of my sparse dock, with only a few permanent icons"&gt;&lt;/p&gt;
+&lt;h3&gt;Apps&lt;/h3&gt;
+&lt;p&gt;I also don't have any reason to keep any of the Apple Suite -- literally no one I know uses Pages, Keynote, or any other pieces. Either we have a license to Office365, or GSuite is used. And quite frankly -- I hope I never have to make another PowerPoint/Keynote or Word Doc the rest of my career.&lt;/p&gt;
+&lt;p&gt;This is also true for GarageBand and iMovie. Just 100% useless on my dev machine for work. But they're also gone from my home machine.&lt;/p&gt;
+&lt;p&gt;If I could delete more apps I would, but for some reason Chess, Mail, Messages, and others I am not allowed to remove. Reminds me of IE in the Windows world. Do any of the apps take up a lot of space? No, but dammit, I want to delete them. I've read a few articles on how to do it by disabling SIP and more, but at the end of the day I don't wanna mess with that. More a curiosity than anything.&lt;/p&gt;
+&lt;h3&gt;zsh&lt;/h3&gt;
+&lt;p&gt;I know how awesome zsh is. And Apple thinks so too because now it is the default shell for OS X. However, I've used bash for 20 years and don't really feel like changing. That's pretty much it -- none of the features of zsh impress me enough to change, so I make sure to &lt;code&gt;chshell&lt;/code&gt; and also add in an env to stop Apple's insistence that I use zsh when I open a terminal (added to my dotfiles of course which you will see below).&lt;/p&gt;
+&lt;h3&gt;Some trackpad stuff&lt;/h3&gt;
+&lt;p&gt;I hate Apple's "natural scrolling" bullshit. Not even going to hide it. And most of the gestures I end up accidentally triggering all the damn time so I turn off a lot of those too.&lt;/p&gt;
+&lt;p&gt;For Point and Click settings I turn off "Look up &amp;amp; data detectors" and "Tap to click". I set the secondary click to be bottom right corner. &lt;/p&gt;
+&lt;p&gt;For the Gestures setting, I only leave on "Swipe between pages" and "Swipe between full-screen apps". I detest the rest of them.&lt;/p&gt;
+&lt;h2&gt;Now to add things!&lt;/h2&gt;
+&lt;h3&gt;Brew&lt;/h3&gt;
+&lt;p&gt;Brew gets installed immediately. It is just too handy of a package manager not to do so and is a predecessor to a lot of the other software I want to install.&lt;/p&gt;
+&lt;h3&gt;iTerm2&lt;/h3&gt;
+&lt;p&gt;The default Termina.app in Mac OS X is okay, but iTerm2 just overall feels better. Snappier, tabbed, and &lt;a href="https://iterm2.com/features.html"&gt;a ton of other features&lt;/a&gt; makes it is my go to. &lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;brew install --cask iterm2
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3&gt;pyenv&lt;/h3&gt;
+&lt;p&gt;Well, as python is my favorite language, pyenv is an immediate add. Helps manage python versions on my machine including the global one. &lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;brew install pyenv
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3&gt;git&lt;/h3&gt;
+&lt;p&gt;Gotta get the real git and easily keep it up to date. The default one with XCode tools (which are necessary to install when installing Brew) lags behind official releases and that has bit me once or twice in the past.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;brew install git
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3&gt;dotfiles&lt;/h3&gt;
+&lt;p&gt;Now that I have my iTerm all set up, I want my colors, aliases, and other things from my dotfiles. Thankfully I maintain them as a repo so I can use them anywhere I want. I simply clone &lt;a href="https://github.com/thebouv/dotfiles"&gt;my dotfiles repo&lt;/a&gt; and run &lt;code&gt;./bootstrap.sh&lt;/code&gt; to install them.  My dotfiles actually need some love to add in a few random things, or to even simplify pieces that I don't utilize. If you compare my &lt;a href="https://github.com/thebouv/dotfiles"&gt;dotfiles&lt;/a&gt; to that of the &lt;a href="https://github.com/mathiasbynens/dotfiles"&gt;parent repo&lt;/a&gt; you can see I've already done a few passes of simplification.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;git clone https://github.com/thebouv/dotfiles
+&lt;span class="nb"&gt;cd&lt;/span&gt; dotfiles
+./bootstrap.sh
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3&gt;Firefox&lt;/h3&gt;
+&lt;p&gt;I open Safari once on the machine to download Firefox. I just can't get used to Safari and I prefer a lot of the built in privacy features of Firefox like encrypted DNS. Not to mention the extensions system where I immediately install uBlock Origin, Facebook Container, and my password manager. I also remove Pocket from the toolbar cause I've never used it and have no intention to do so now. I try to stay as extension-lite as I can in Firefox to keep bloat down.&lt;/p&gt;
+&lt;p&gt;I should have looked to see if I could install via brew but didn't so did it the traditional way via the Firefox/Mozilla website.&lt;/p&gt;
+&lt;h3&gt;VS Code&lt;/h3&gt;
+&lt;p&gt;And of course, I have to get VS Code as soon as possible. Thankfully even VS Code is installable via Brew and that's exactly what I do.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;brew install --cask visual-studio-code
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3&gt;Rectangle&lt;/h3&gt;
+&lt;p&gt;Previously I used to always install Spectacle as a window management tool for OS X but it is no longer actively developed. Rectangle is the replacement and of course it is on Brew too.&lt;/p&gt;
+&lt;p&gt;I really can't function without this app. My muscle memory for moving windows around is strongly keyboard based and when setting up Rectangle it forgivingly allowed me to use Spectacle shortcut combos without needing to learn new ones for Rectangle.&lt;/p&gt;
+&lt;p&gt;I actually need to switch this personal laptop over to it as well.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;brew install --cask rectangle
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h2&gt;Physical stuff&lt;/h2&gt;
+&lt;p&gt;Because I am known to be a fan of stickers for my laptops I immediately have to buy some things.&lt;/p&gt;
+&lt;p&gt;First up is a hard plastic shell for the laptop itself. It is a shame to hide the slick looking dark metal casing, but I can't have any stickers potentially gumming it up. Plus, adding a case gives it more protection and a way to swap out cases if I want new stickers or a new look in the future.&lt;/p&gt;
+&lt;p&gt;My last work laptop had a light purple look to it with a matte finish, but I found the matte didn't take as well as gloss to removing stickers over time if they start to peel.&lt;/p&gt;
+&lt;p&gt;So my new case is bright orange, gloss, and comes with a silicone keyboard cover. It's nice that this is a bundle cause I always buy keyboard covers for MacBook Pros as well. Their keyboards have been known on some models to be very sensitive to dust (looking at you butterfly keyboard on my personal laptop).&lt;/p&gt;
+&lt;p&gt;&lt;img src="/images/maccase.png" alt="product image for the orange case I bought for my mac"&gt;&lt;/p&gt;
+&lt;p&gt;And of course I need to buy stickers next. Usually I can pull from my stacks and stacks of left overs. But most of those are programming related and my career has shifted over time to more &lt;a href="https://en.wikipedia.org/wiki/Infrastructure_as_code"&gt;Infrastructure as Code&lt;/a&gt; and other &lt;a href="https://en.wikipedia.org/wiki/DevOps"&gt;DevOps tooling&lt;/a&gt; related.&lt;/p&gt;
+&lt;p&gt;So now I'm on the hunt for stickers for TerraForm, Jenkins, AWS and Azure, and more. Eventually I'll edit this post and add in pics of the laptop once it is all covered up in sticker goodness.&lt;/p&gt;
+&lt;h2&gt;That's all?!&lt;/h2&gt;
+&lt;p&gt;Not really. I'm also going to install things specifically for work like Terraform, Azure and AWS CLI clients, Docker, and tools specifically for work. I didn't go into detail for each because pretty much everything I've said above is what I'd do on any new dev machine, even a personal one.&lt;/p&gt;
+&lt;p&gt;I'll post soon about my new role and likely more about my specific tooling for that as well.&lt;/p&gt;</content><category term="career"></category><category term="career"></category><category term="development"></category><category term="hardware"></category></entry><entry><title>Director of Miscellaneous</title><link href="https://thebouv.com/director-of-miscellaneous.html" rel="alternate"></link><published>2021-07-09T00:00:00-05:00</published><updated>2021-07-09T00:00:00-05:00</updated><author><name>Anthony Bouvier</name></author><id>tag:thebouv.com,2021-07-09:/director-of-miscellaneous.html</id><summary type="html">&lt;p&gt;Crazy week of miscellaneous sums up my job pretty well.&lt;/p&gt;</summary><content type="html">&lt;p&gt;People wonder what I mean by Director of Miscellaneous that I joke is my title.&lt;/p&gt;
+&lt;p&gt;Well this week I:&lt;br&gt;
+&lt;em&gt; Set up a new Linux vm to help one engineering team to handle secure file transfer for a trial run with a client&lt;br&gt;
+&lt;/em&gt; Got XCode set up to ad-hoc distribute a test app (I am not a mobile developer or their lead, but stepping in as lead in interim)&lt;br&gt;
+&lt;em&gt; Set up our enterprise nuget registry with example repo &amp;amp; docs on how to repeat (I am not a .NET engineer at all)&lt;br&gt;
+&lt;/em&gt; Started an architecture plan for a multi-tenant iOS app (again, not a mobile dev myself, and this includes all the backend architecture too)  &lt;/p&gt;
+&lt;p&gt;And that’s just some of the random highlights. At any other given time I'm managing my team, building prototypes of ideas or containerizing someone else's proof-of-concept so we can test it, working on continuous learning plans for my team (and hopefully model for other teams), or doing CloudOps/DevOps work.&lt;/p&gt;
+&lt;p&gt;Quite frankly this has just always been my career over 20 years. I thrive on variety, juggling multiple types of projects, and both overseeing things and being at the ground level building at the same time.&lt;/p&gt;
+&lt;p&gt;Variety is the spice of life right? Now I'm going to go take a nap. ;)&lt;/p&gt;</content><category term="career"></category><category term="career"></category></entry><entry><title>Chasing Features</title><link href="https://thebouv.com/chasing-features.html" rel="alternate"></link><published>2021-06-15T00:00:00-05:00</published><updated>2021-06-15T00:00:00-05:00</updated><author><name>Anthony Bouvier</name></author><id>tag:thebouv.com,2021-06-15:/chasing-features.html</id><summary type="html">&lt;p&gt;Inspired by a tweet from another person, I wanted to talk about chasing features that are shiny, and ignoring things that aren't "features" (even though they are).&lt;/p&gt;</summary><content type="html">&lt;p&gt;Don’t just chase “features”. As many have said, and it’s highlighted below in Dan Mayer's tweet, lots of things are “features”. Far too often there are members of your organization that only concentrate on visible, consumer-facing features. And those are definitely nice and "ooh-ahh"-inspiring. And those features win accolades and obvious praise from users and even co-workers.&lt;/p&gt;
+&lt;p&gt;But there's a lot more to building great software than constantly shotgunning features into your project. If you're doing that, you're very likely ignoring so many other important aspects of both brown-field and green-field development.&lt;/p&gt;
+&lt;p&gt;Make sure to take the time to document technical debt and find a place for it in sprint. Dedicate a day a week or two days per sprint to solely cleaning up technical deb and performing maintenance or writing much needed documentation.&lt;/p&gt;
+&lt;p&gt;The less technical debt you let pile up, the faster your development team can build the visible features. The better your documentation, the faster new team members can get up to speed and faster they can deliver value to your customers. Optimizing code and concentrating on maintenance tasks so they don't get forgotten makes your software more delightful to use -- making it sticky for your users.&lt;/p&gt;
+&lt;p&gt;So the next time a product manager, sales team member, or even another developer tells you to ignore those things and only concentrate on visible features, let them know:&lt;/p&gt;
+&lt;p&gt;Cleaning up technical debt is a feature!  &lt;/p&gt;
+&lt;p&gt;Performance work is a feature!  &lt;/p&gt;
+&lt;p&gt;Maintenance work is a feature!  &lt;/p&gt;
+&lt;p&gt;Cleaning up errors in logs is a feature!  &lt;/p&gt;
+&lt;p&gt;Writing tests is a feature!  &lt;/p&gt;
+&lt;p&gt;The invisible work is what keeps the foundation solid to build all features on.  &lt;/p&gt;
+&lt;p&gt;&lt;img src="/images/dan_mayer_tweet.jpg"&gt;&lt;/p&gt;</content><category term="career"></category><category term="career"></category><category term="devops"></category><category term="development"></category></entry><entry><title>Don't idolize Elon Musk</title><link href="https://thebouv.com/dont-idolize-elon-musk.html" rel="alternate"></link><published>2021-04-02T00:00:00-05:00</published><updated>2021-04-02T00:00:00-05:00</updated><author><name>Anthony Bouvier</name></author><id>tag:thebouv.com,2021-04-02:/dont-idolize-elon-musk.html</id><summary type="html">&lt;p&gt;I responded to someone on LinkedIn shaming people for using "I don't have time" as an excuse and praising Elon Musk's overworking habits. Wanted to capture my response here as well.&lt;/p&gt;</summary><content type="html">&lt;p&gt;I responded to someone on LinkedIn shaming people for using "I don't have time" as an excuse and praising Elon Musk's overworking habits. Wanted to capture my response here as well.&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;Let's not try to normalize working 85-100 hours a week. That's ridiculous. And shame on you for holding that up as something to aspire too. &lt;/p&gt;
 &lt;p&gt;Before spouting some glorification of overworking why don't you do a little math?&lt;/p&gt;
 &lt;p&gt;Let's be generous and use the whole seven days in a week. &lt;/p&gt;
 &lt;p&gt;168 hours in a week. &lt;/p&gt;
