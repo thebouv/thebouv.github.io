@@ -21,7 +21,6 @@
     <link rel="icon" type="image/jpg" href="https://thebouv.com/images/thebouv.jpg">
     <link rel="alternate" type="application/atom+xml" href="https://thebouv.com/feeds/atom.xml" title="Atom Feed">
     <link rel="alternate" type="application/atom+xml" href="https://thebouv.com/feeds/all.atom.xml" title="Full Atom Feed">
-    <link rel="alternate" type="application/atom+xml" href="https://thebouv.com/feeds/{slug}.atom.xml" title="Categories Atom Feed">
     <!-- Script -->
     <script>
       function setTheme() {
@@ -31,6 +30,8 @@
         }
       }
     </script>
+    {block extrahead}
+    {endblock}
   </head>
   <body class="list">
     <script>
