@@ -8,19 +8,19 @@
     <meta name="description" content="Geek of All Trades. Maker and Breaker. Tinkerer and Thinker-er.">
     <meta name="author" content="Anthony Bouvier">
     <meta name="twitter:card" content="summary">
-    <meta name="twitter:image" content="https://thebouv.com/images/thebouv20220607.jpg">
+    <meta name="twitter:image" content="/images/thebouv.jpg">
     <meta name="twitter:description" content="Geek of All Trades. Maker and Breaker. Tinkerer and Thinker-er.">
     <meta name="twitter:creator" content="">
-    <meta property="og:url" content="https://thebouv.com"/>
+    <meta property="og:url" content=""/>
     <meta property="og:title" content="thebouv" />
     <meta property="og:description" content="Geek of All Trades. Maker and Breaker. Tinkerer and Thinker-er." />
     <!-- Styles -->
-    <link rel="stylesheet" type="text/css" href="https://thebouv.com/theme/css/paper.css" />
-    <link rel="stylesheet" type="text/css" href="https://thebouv.com/theme/css/pygment.css" />
+    <link rel="stylesheet" type="text/css" href="/theme/css/paper.css" />
+    <link rel="stylesheet" type="text/css" href="/theme/css/pygment.css" />
     <!-- Favicons -->
-    <link rel="icon" type="image/jpg" href="https://thebouv.com/images/thebouv20220607.jpg">
-    <link rel="alternate" type="application/atom+xml" href="https://thebouv.com/feeds/atom.xml" title="Atom Feed">
-    <link rel="alternate" type="application/atom+xml" href="https://thebouv.com/feeds/all.atom.xml" title="Full Atom Feed">
+    <link rel="icon" type="image/jpg" href="/images/thebouv.jpg">
+    <link rel="alternate" type="application/atom+xml" href="/" title="Atom Feed">
+    <link rel="alternate" type="application/atom+xml" href="/None" title="Full Atom Feed">
     <!-- Script -->
     <script>
       function setTheme() {
@@ -40,10 +40,10 @@
         <h1 class="logo"><a href="/">thebouv</a></h1>
         <ul class="menu">
           <li>
-            <a href="https://thebouv.com/pages/about.html">about</a>
+            <a href="/pages/about.html">about</a>
           </li>
           <li>
-            <a href="https://thebouv.com/tags.html">tags</a>
+            <a href="/tags.html">tags</a>
           </li>
         </ul>
       </nav>
@@ -53,7 +53,7 @@
   <header class="post-header">
     <h1 class="post-title">Setting up my new Mac</h1>
     <div class="post-meta">
-        By Anthony Bouvier on Mon 23 August 2021
+        <!-- By Anthony Bouvier on Mon 23 August 2021 -->
     </div>
   </header>
   <div class="post-content"><p>I'm starting a new job soon after 7 years at my previous company. As I was installing a few things I decided I should document what I normally do. This isn't a deeply technical article, and is really just a bunch of my opinions, but I think it'll be interesting to some.</p>
@@ -77,23 +77,23 @@
 <p>Brew gets installed immediately. It is just too handy of a package manager not to do so and is a predecessor to a lot of the other software I want to install.</p>
 <h3>iTerm2</h3>
 <p>The default Termina.app in Mac OS X is okay, but iTerm2 just overall feels better. Snappier, tabbed, and <a href="https://iterm2.com/features.html">a ton of other features</a> makes it is my go to. </p>
-<div class="highlight"><pre><span></span><code>brew install --cask iterm2
+<div class="highlight"><pre><span></span><code>brew<span class="w"> </span>install<span class="w"> </span>--cask<span class="w"> </span>iterm2
 </code></pre></div>
 
 <h3>pyenv</h3>
 <p>Well, as python is my favorite language, pyenv is an immediate add. Helps manage python versions on my machine including the global one. </p>
-<div class="highlight"><pre><span></span><code>brew install pyenv
+<div class="highlight"><pre><span></span><code>brew<span class="w"> </span>install<span class="w"> </span>pyenv
 </code></pre></div>
 
 <h3>git</h3>
 <p>Gotta get the real git and easily keep it up to date. The default one with XCode tools (which are necessary to install when installing Brew) lags behind official releases and that has bit me once or twice in the past.</p>
-<div class="highlight"><pre><span></span><code>brew install git
+<div class="highlight"><pre><span></span><code>brew<span class="w"> </span>install<span class="w"> </span>git
 </code></pre></div>
 
 <h3>dotfiles</h3>
 <p>Now that I have my iTerm all set up, I want my colors, aliases, and other things from my dotfiles. Thankfully I maintain them as a repo so I can use them anywhere I want. I simply clone <a href="https://github.com/thebouv/dotfiles">my dotfiles repo</a> and run <code>./bootstrap.sh</code> to install them.  My dotfiles actually need some love to add in a few random things, or to even simplify pieces that I don't utilize. If you compare my <a href="https://github.com/thebouv/dotfiles">dotfiles</a> to that of the <a href="https://github.com/mathiasbynens/dotfiles">parent repo</a> you can see I've already done a few passes of simplification.</p>
-<div class="highlight"><pre><span></span><code>git clone https://github.com/thebouv/dotfiles
-<span class="nb">cd</span> dotfiles
+<div class="highlight"><pre><span></span><code>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/thebouv/dotfiles
+<span class="nb">cd</span><span class="w"> </span>dotfiles
 ./bootstrap.sh
 </code></pre></div>
 
@@ -102,14 +102,14 @@
 <p>I should have looked to see if I could install via brew but didn't so did it the traditional way via the Firefox/Mozilla website.</p>
 <h3>VS Code</h3>
 <p>And of course, I have to get VS Code as soon as possible. Thankfully even VS Code is installable via Brew and that's exactly what I do.</p>
-<div class="highlight"><pre><span></span><code>brew install --cask visual-studio-code
+<div class="highlight"><pre><span></span><code>brew<span class="w"> </span>install<span class="w"> </span>--cask<span class="w"> </span>visual-studio-code
 </code></pre></div>
 
 <h3>Rectangle</h3>
 <p>Previously I used to always install Spectacle as a window management tool for OS X but it is no longer actively developed. Rectangle is the replacement and of course it is on Brew too.</p>
 <p>I really can't function without this app. My muscle memory for moving windows around is strongly keyboard based and when setting up Rectangle it forgivingly allowed me to use Spectacle shortcut combos without needing to learn new ones for Rectangle.</p>
 <p>I actually need to switch this personal laptop over to it as well.</p>
-<div class="highlight"><pre><span></span><code>brew install --cask rectangle
+<div class="highlight"><pre><span></span><code>brew<span class="w"> </span>install<span class="w"> </span>--cask<span class="w"> </span>rectangle
 </code></pre></div>
 
 <h2>Physical stuff</h2>
@@ -125,15 +125,15 @@
 <p>I'll post soon about my new role and likely more about my specific tooling for that as well.</p></div>
   <footer class="post-footer">
     <ul class="post-tags">
-        <li><a href="https://thebouv.com/tag/career.html">career</a></li>
-        <li><a href="https://thebouv.com/tag/development.html">development</a></li>
-        <li><a href="https://thebouv.com/tag/hardware.html">hardware</a></li>
+        <li><a href="/tag/career.html">career</a></li>
+        <li><a href="/tag/development.html">development</a></li>
+        <li><a href="/tag/hardware.html">hardware</a></li>
       </ul>
   </footer>
 </article>
     </main>
   <footer class="footer">
-    <span>&copy; 2022 Anthony Bouvier &middot; Geek of All Trades. Maker and Breaker. Tinkerer and Thinker-er.</span>
+    <span>&copy; 2024 Anthony Bouvier &middot; Geek of All Trades. Maker and Breaker. Tinkerer and Thinker-er.</span>
   </footer>
   </body>
 </html>

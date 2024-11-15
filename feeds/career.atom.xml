@@ -20,23 +20,23 @@
 &lt;p&gt;Brew gets installed immediately. It is just too handy of a package manager not to do so and is a predecessor to a lot of the other software I want to install.&lt;/p&gt;
 &lt;h3&gt;iTerm2&lt;/h3&gt;
 &lt;p&gt;The default Termina.app in Mac OS X is okay, but iTerm2 just overall feels better. Snappier, tabbed, and &lt;a href="https://iterm2.com/features.html"&gt;a ton of other features&lt;/a&gt; makes it is my go to. &lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;brew install --cask iterm2
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;brew&lt;span class="w"&gt; &lt;/span&gt;install&lt;span class="w"&gt; &lt;/span&gt;--cask&lt;span class="w"&gt; &lt;/span&gt;iterm2
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;h3&gt;pyenv&lt;/h3&gt;
 &lt;p&gt;Well, as python is my favorite language, pyenv is an immediate add. Helps manage python versions on my machine including the global one. &lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;brew install pyenv
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;brew&lt;span class="w"&gt; &lt;/span&gt;install&lt;span class="w"&gt; &lt;/span&gt;pyenv
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;h3&gt;git&lt;/h3&gt;
 &lt;p&gt;Gotta get the real git and easily keep it up to date. The default one with XCode tools (which are necessary to install when installing Brew) lags behind official releases and that has bit me once or twice in the past.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;brew install git
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;brew&lt;span class="w"&gt; &lt;/span&gt;install&lt;span class="w"&gt; &lt;/span&gt;git
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;h3&gt;dotfiles&lt;/h3&gt;
 &lt;p&gt;Now that I have my iTerm all set up, I want my colors, aliases, and other things from my dotfiles. Thankfully I maintain them as a repo so I can use them anywhere I want. I simply clone &lt;a href="https://github.com/thebouv/dotfiles"&gt;my dotfiles repo&lt;/a&gt; and run &lt;code&gt;./bootstrap.sh&lt;/code&gt; to install them.  My dotfiles actually need some love to add in a few random things, or to even simplify pieces that I don't utilize. If you compare my &lt;a href="https://github.com/thebouv/dotfiles"&gt;dotfiles&lt;/a&gt; to that of the &lt;a href="https://github.com/mathiasbynens/dotfiles"&gt;parent repo&lt;/a&gt; you can see I've already done a few passes of simplification.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;git clone https://github.com/thebouv/dotfiles
-&lt;span class="nb"&gt;cd&lt;/span&gt; dotfiles
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;git&lt;span class="w"&gt; &lt;/span&gt;clone&lt;span class="w"&gt; &lt;/span&gt;https://github.com/thebouv/dotfiles
+&lt;span class="nb"&gt;cd&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;dotfiles
 ./bootstrap.sh
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
@@ -45,14 +45,14 @@
 &lt;p&gt;I should have looked to see if I could install via brew but didn't so did it the traditional way via the Firefox/Mozilla website.&lt;/p&gt;
 &lt;h3&gt;VS Code&lt;/h3&gt;
 &lt;p&gt;And of course, I have to get VS Code as soon as possible. Thankfully even VS Code is installable via Brew and that's exactly what I do.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;brew install --cask visual-studio-code
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;brew&lt;span class="w"&gt; &lt;/span&gt;install&lt;span class="w"&gt; &lt;/span&gt;--cask&lt;span class="w"&gt; &lt;/span&gt;visual-studio-code
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;h3&gt;Rectangle&lt;/h3&gt;
 &lt;p&gt;Previously I used to always install Spectacle as a window management tool for OS X but it is no longer actively developed. Rectangle is the replacement and of course it is on Brew too.&lt;/p&gt;
 &lt;p&gt;I really can't function without this app. My muscle memory for moving windows around is strongly keyboard based and when setting up Rectangle it forgivingly allowed me to use Spectacle shortcut combos without needing to learn new ones for Rectangle.&lt;/p&gt;
 &lt;p&gt;I actually need to switch this personal laptop over to it as well.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;brew install --cask rectangle
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;brew&lt;span class="w"&gt; &lt;/span&gt;install&lt;span class="w"&gt; &lt;/span&gt;--cask&lt;span class="w"&gt; &lt;/span&gt;rectangle
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;h2&gt;Physical stuff&lt;/h2&gt;
